@@ -6,9 +6,9 @@ namespace Services
 {
     public class RoomTypeServices
     {
-        public List<RoomType> GetAllRoomTypes()
+        public async Task<IEnumerable<RoomType>> GetAllRoomTypes()
         {
-            return RoomTypeRepository.Instance.GetRoomTypes();
+            return await RoomTypeRepository.Instance.GetRoomTypes();
         }
     }
 }

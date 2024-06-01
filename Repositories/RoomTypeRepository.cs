@@ -1,8 +1,10 @@
-﻿using Repositories.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Repositories.Entities;
+using Repositories.Interfaces;
 
 namespace Repositories
 {
-    public class RoomTypeRepository
+    public class RoomTypeRepository : IRoomTypeRepository
     {
         // Using Singleton Pattern
         private static RoomTypeRepository instance = null;
@@ -25,10 +27,10 @@ namespace Repositories
 
         private FuminiHotelManagementContext _context;
 
-        public List<RoomType> GetRoomTypes()
+        public async Task<IEnumerable<RoomType>> GetRoomTypes()
         {
             _context = new();
-            return _context.RoomTypes.ToList();
+            return await _context.RoomTypes.ToListAsync();
         }
     }
 }

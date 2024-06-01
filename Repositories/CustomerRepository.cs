@@ -1,10 +1,11 @@
 ﻿
 
 using Repositories.Entities;
+using Repositories.Interfaces;
 
 namespace Repositories
 {
-    public class CustomerRepository
+    public class CustomerRepository : ICustomerRepository
     {
         // Using Singleton Pattern
         private static CustomerRepository instance = null;

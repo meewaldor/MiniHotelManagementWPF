@@ -5,9 +5,9 @@ namespace Services
 {
     public class RoomInformationService
     {
-        public List<RoomInformation> GetAllRoomInformations()
+        public async Task<IEnumerable<RoomInformation>> GetAllRoomInformations()
         {
-            return RoomInformationRepository.Instance.GetRoomInformations();
+            return await RoomInformationRepository.Instance.GetRoomInformations();
         }
 
         public RoomInformation GetRoomInformationById(int id)

@@ -2,10 +2,11 @@
 
 using Microsoft.EntityFrameworkCore;
 using Repositories.Entities;
+using Repositories.Interfaces;
 
 namespace Repositories
 {
-    public class RoomInformationRepository
+    public class RoomInformationRepository : IRoomInformationRepository
     {
         private static RoomInformationRepository instance = null;
         private static readonly object instanceLock = new object();
@@ -27,10 +28,10 @@ namespace Repositories
 
         private FuminiHotelManagementContext _context;
 
-        public List<RoomInformation> GetRoomInformations ()
+        public async Task<IEnumerable<RoomInformation>> GetRoomInformations ()
         {
             _context = new();
-            return _context.RoomInformations.ToList();
+            return await _context.RoomInformations.ToListAsync();
         }
 
         public RoomInformation GetRoomInformationById (int id)
