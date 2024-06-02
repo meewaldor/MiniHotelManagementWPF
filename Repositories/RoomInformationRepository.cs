@@ -37,7 +37,7 @@ namespace Repositories
         public RoomInformation GetRoomInformationById (int id)
         {
             _context = new();
-            return _context.RoomInformations.Find (id);
+            return _context.RoomInformations.Find(id);
         }
         public bool AddRoomInformation (RoomInformation roomInformation)
         {
@@ -60,5 +60,12 @@ namespace Repositories
             return _context.SaveChanges() > 0;
         }
 
+        public async Task<IEnumerable<RoomInformation>> GetRoomInformationsByType(int roomTypeId)
+        {
+            _context = new();
+            return await _context.RoomInformations
+                .Where(r => r.RoomTypeId == roomTypeId)
+                .ToListAsync();
+        }
     }
 }

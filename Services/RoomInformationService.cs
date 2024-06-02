@@ -14,6 +14,10 @@ namespace Services
         {
             return RoomInformationRepository.Instance.GetRoomInformationById(id);
         }
+        public async Task<IEnumerable<RoomInformation>> GetRoomInformationsByType(int roomTypeId)
+        {
+            return await RoomInformationRepository.Instance.GetRoomInformationsByType(roomTypeId);
+        }
 
         public bool AddRoomInformation (RoomInformation roomInformation)
         {
@@ -29,5 +33,6 @@ namespace Services
         {
             return RoomInformationRepository.Instance.DeleteRoomInformation (roomInformation);
         }
+
     }
 }

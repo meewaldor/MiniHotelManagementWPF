@@ -6,6 +6,7 @@ namespace Repositories.Interfaces
     {
         Task<IEnumerable<RoomInformation>> GetRoomInformations();
         RoomInformation GetRoomInformationById(int id);
+        Task<IEnumerable<RoomInformation>> GetRoomInformationsByType(int roomTypeId);
         bool AddRoomInformation(RoomInformation roomInformation);
         bool UpdateRoomInformation(RoomInformation roomInformation);
         bool DeleteRoomInformation(RoomInformation roomInformation);
