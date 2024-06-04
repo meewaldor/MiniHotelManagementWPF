@@ -13,9 +13,9 @@
             <TextBlock Text="Login" FontSize="36" FontWeight="Bold" Foreground="#333333" Margin="0 0 0 20" HorizontalAlignment="Center"/>
             <StackPanel Margin="0 20">
                 <Label Content="Username" FontSize="18" FontWeight="Bold" Foreground="#333333"/>
-                <TextBox TextWrapping="Wrap" Height="40" FontSize="18" BorderThickness="1" BorderBrush="#999999" Margin="0 5"/>
+                <TextBox x:Name="UsernameTextBox" TextWrapping="Wrap" Height="40" FontSize="18" BorderThickness="1" BorderBrush="#999999" Margin="0 5"/>
                 <Label Content="Password" FontSize="18" FontWeight="Bold" Foreground="#333333" Margin="0 10"/>
-                <PasswordBox Height="40" FontSize="18" BorderThickness="1" BorderBrush="#999999" Margin="0 5"/>
+                <PasswordBox x:Name="PasswordBox" Height="40" FontSize="18" BorderThickness="1" BorderBrush="#999999" Margin="0 5"/>
                 <Button Content="Login" Click="LoginButton_Click" FontSize="24" FontWeight="Bold" Background="#007ACC" Foreground="White" Height="50" Margin="0 20"/>
             </StackPanel>
         </StackPanel>

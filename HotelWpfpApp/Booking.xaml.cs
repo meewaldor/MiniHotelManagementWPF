@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Repositories.Dtos;
+using Repositories.Entities;
+using Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,15 +23,25 @@ namespace HotelWpfpApp
     /// </summary>
     public partial class Booking : Page
     {
+        private BookingService bookingService;
+
         public Booking()
         {
             InitializeComponent();
+            bookingService = new BookingService();
+            LoadBookingData();
+        }
+
+        private async void LoadBookingData()
+        {
+            IEnumerable<BookingReservationDTO> bookings = await bookingService.GetAllBookingReservations();
+            BookingDataGrid.ItemsSource = bookings;
         }
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
             // Chuyển đến trang Admin khi nhấn nút Login
-            NavigationService?.Navigate(new Room());
+            NavigationService?.Navigate(new AddUpdate());
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)

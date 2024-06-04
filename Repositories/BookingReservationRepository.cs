@@ -44,8 +44,9 @@ namespace Repositories
         {
             _context = new();
             return await _context.BookingReservations
-                .Include(b => b.BookingDetails)
-                .ToListAsync();
+            .Include(b => b.Customer) 
+            .Include(b => b.BookingDetails) 
+            .ToListAsync();
         }
 
         public BookingReservation GetBookingById(int id)

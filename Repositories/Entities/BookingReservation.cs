@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Repositories.Entities;
 
-public partial class BookingReservation
+public class BookingReservation
 {
     public int BookingReservationId { get; set; }
 

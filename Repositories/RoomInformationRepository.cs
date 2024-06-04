@@ -31,13 +31,17 @@ namespace Repositories
         public async Task<IEnumerable<RoomInformation>> GetRoomInformations ()
         {
             _context = new();
-            return await _context.RoomInformations.ToListAsync();
+            return await _context.RoomInformations
+                .Include(r => r.RoomType)
+                .ToListAsync();
         }
 
         public RoomInformation GetRoomInformationById (int id)
         {
             _context = new();
-            return _context.RoomInformations.Find(id);
+            return _context.RoomInformations
+                .Include(r => r.RoomType)
+                .FirstOrDefault(r => r.RoomId == id);
         }
         public bool AddRoomInformation (RoomInformation roomInformation)
         {

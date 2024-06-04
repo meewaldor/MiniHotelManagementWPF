@@ -1,11 +1,32 @@
 ﻿using Repositories;
+using Repositories.Dtos;
 using Repositories.Entities;
 using Repositories.Interfaces;
+using Services.Dtos;
 
 namespace Services
 {
     public class BookingService
     {
+        public async Task<IEnumerable<BookingReservationDTO>> GetAllBookingReservations()
+        {
+            var bookingReservations = await BookingReservationRepository.Instance.GetAllBookings();
+
+            var bookingReservationDTOs = bookingReservations
+                .Select(b => new BookingReservationDTO
+                {
+                    BookingReservationId = b.BookingReservationId,
+                    BookingDate = b.BookingDate,
+                    TotalPrice = b.TotalPrice,
+                    CustomerId = b.CustomerId,
+                    CustomerName = b.Customer?.CustomerFullName, // Get the customer's full name
+                    BookingStatus = b.BookingStatus,
+                    BookingDetails = b.BookingDetails.ToList()
+                })
+                .ToList();
+
+            return bookingReservationDTOs;
+        }
         public bool AddBooking (BookingReservation bookingReservation)
         {
             return BookingReservationRepository.Instance.AddBooking (bookingReservation);

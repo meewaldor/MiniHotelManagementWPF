@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Repositories.Entities;
 
-public partial class Customer
+public class Customer
 {
     public int CustomerId { get; set; }
 

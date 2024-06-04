@@ -16,28 +16,23 @@ using System.Windows.Shapes;
 namespace HotelWpfpApp
 {
     /// <summary>
-    /// Interaction logic for Admin.xaml
+    /// Interaction logic for AddUpdate.xaml
     /// </summary>
-    public partial class Admin : Page
+    public partial class AddUpdate : Page
     {
-        public Admin()
+        public AddUpdate()
         {
             InitializeComponent();
         }
 
-        private void ManageCustomerButton_Click(object sender, RoutedEventArgs e)
+        public void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new Customer());
+            
         }
 
-        private void ManageBookingButton_Click(object sender, RoutedEventArgs e)
+        public void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService?.Navigate(new Booking());
-        }
-
-        private void ManageRoomButton_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService?.Navigate(new Room());
         }
     }
 }

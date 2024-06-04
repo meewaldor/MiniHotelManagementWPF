@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Repositories;
+using Repositories.Dtos;
+using Services;
+using Services.Dtos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +24,19 @@ namespace HotelWpfpApp
     /// </summary>
     public partial class Customer : Page
     {
+        private CustomerService customerService;
+
         public Customer()
         {
             InitializeComponent();
+            customerService = new CustomerService();
+            LoadCustomerData();
+        }
+
+        private async void LoadCustomerData()
+        {
+            IEnumerable<CustomerDTO> customers = await customerService.GetAllCustomers();
+            CustomerDataGrid.ItemsSource = customers;
         }
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)

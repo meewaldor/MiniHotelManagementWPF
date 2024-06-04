@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using Repositories;
+using Services;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace HotelWpfpApp
 {
@@ -20,17 +12,39 @@ namespace HotelWpfpApp
     /// </summary>
     public partial class Login : Page
     {
+        private CustomerService customerService;
+        private CustomerRepository customerRepository;
+
         public Login()
         {
             InitializeComponent();
+            customerService = new CustomerService();
         }
 
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            // Chuyển đến trang Admin khi nhấn nút Login
-            NavigationService?.Navigate(new Admin());
+            string username = UsernameTextBox.Text;
+            string password = PasswordBox.Password;
+
+            Repositories.Entities.Customer customer = customerService.CheckLogin(username, password);
+
+            if (customer != null)
+            {
+                if (customer.CustomerStatus == 2)
+                {
+                    // Chuyển đến trang Admin khi người dùng là admin
+                    NavigationService?.Navigate(new Admin());
+                }
+                else
+                {
+                    // Chuyển đến trang Customer khi người dùng không phải là admin
+                    NavigationService?.Navigate(new Customer());
+                }
+            }
+            else
+            {
+                MessageBox.Show("Invalid username or password");
+            }
         }
-
-
     }
 }

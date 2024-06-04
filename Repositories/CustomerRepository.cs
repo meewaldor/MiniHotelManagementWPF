@@ -1,5 +1,6 @@
 ﻿
 
+using Microsoft.EntityFrameworkCore;
 using Repositories.Entities;
 using Repositories.Interfaces;
 
@@ -34,6 +35,13 @@ namespace Repositories
             return _context.Customers.FirstOrDefault(
                 account => account.EmailAddress.Equals(email) && account.Password.Equals(password)
                 );
+        }
+
+        public async Task<IEnumerable<Customer>> GetAllCustomersConfig()
+        {
+            _context = new();
+            return await _context.Customers
+            .ToListAsync();
         }
     }
 }
