@@ -41,25 +41,25 @@ namespace HotelWpfpApp
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
             // Chuyển đến trang Admin khi nhấn nút Login
-            NavigationService?.Navigate(new AddUpdate());
+            //NavigationService?.Navigate(new AddUpdate());
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             // Chuyển đến trang Admin khi nhấn nút Login
-            NavigationService?.Navigate(new Room());
+            //NavigationService?.Navigate(new Room());
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             // Chuyển đến trang Admin khi nhấn nút Login
-            NavigationService?.Navigate(new Room());
+            //NavigationService?.Navigate(new Room());
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             // Chuyển đến trang Admin khi nhấn nút Login
-            NavigationService?.Navigate(new Admin());
+           // NavigationService?.Navigate(new Admin());
         }
     }
 }

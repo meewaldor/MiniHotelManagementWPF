@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,8 +21,10 @@ namespace HotelWpfpApp
     /// </summary>
     public partial class Admin : Page
     {
-        public Admin()
+        private readonly RoomInformationService _roomInformationService;
+        public Admin(RoomInformationService roomInformationService)
         {
+            _roomInformationService = roomInformationService;
             InitializeComponent();
         }
 
@@ -37,7 +40,7 @@ namespace HotelWpfpApp
 
         private void ManageRoomButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new Room());
+            NavigationService?.Navigate(new RoomManagementUI(_roomInformationService));
         }
     }
 }

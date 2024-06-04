@@ -29,7 +29,7 @@ namespace HotelWpfpApp
         public Customer()
         {
             InitializeComponent();
-            customerService = new CustomerService();
+            //customerService = new CustomerService();
             LoadCustomerData();
         }
 
@@ -42,25 +42,25 @@ namespace HotelWpfpApp
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
             // Chuyển đến trang Admin khi nhấn nút Login
-            NavigationService?.Navigate(new Room());
+            //NavigationService?.Navigate(new Room());
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             // Chuyển đến trang Admin khi nhấn nút Login
-            NavigationService?.Navigate(new Room());
+            //NavigationService?.Navigate(new Room());
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             // Chuyển đến trang Admin khi nhấn nút Login
-            NavigationService?.Navigate(new Room());
+            //NavigationService?.Navigate(new Room());
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             // Chuyển đến trang Admin khi nhấn nút Login
-            NavigationService?.Navigate(new Admin());
+            //NavigationService?.Navigate(new Admin());
         }
     }
 }

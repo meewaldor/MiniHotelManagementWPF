@@ -9,20 +9,21 @@ namespace Services
 {
     public class CustomerService
     {
-
-        public CustomerService()
+        private readonly CustomerRepository _customerRepository;
+        public CustomerService(CustomerRepository customerRepository)
         {
+            _customerRepository = customerRepository;
         }
 
         // Check login
         public Customer? CheckLogin(string username, string password)
         {
-            return CustomerRepository.Instance.GetUserAccount(username, password);
+            return _customerRepository.GetUserAccount(username, password);
         }
 
         public async Task<IEnumerable<CustomerDTO>> GetAllCustomers()
         {
-            var customers = await CustomerRepository.Instance.GetAllCustomersConfig();
+            var customers = await _customerRepository.GetAllCustomersConfig();
 
             var customerDTOs = customers
                 .Select(b => new CustomerDTO
