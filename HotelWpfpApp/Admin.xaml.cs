@@ -1,18 +1,5 @@
-﻿using Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace HotelWpfpApp
 {
@@ -21,28 +8,30 @@ namespace HotelWpfpApp
     /// </summary>
     public partial class Admin : Page
     {
-        private readonly RoomInformationService _roomInformationService;
-        private readonly CustomerService _customerService;
-        public Admin(RoomInformationService roomInformationService, CustomerService customerService)
-        {
-            _roomInformationService = roomInformationService;
+        private readonly RoomManagementUI _roomManagementUI;
+        private readonly BookingManagementUI _bookingManagementUI;
+        private readonly CustomerManagementUI _customerManagementUI;
+        public Admin(RoomManagementUI roomManagementUI,CustomerManagementUI customerManagementUI, BookingManagementUI bookingManagementUI)
+        { 
+            _roomManagementUI = roomManagementUI;
+            _bookingManagementUI = bookingManagementUI;
+            _customerManagementUI = customerManagementUI;
             InitializeComponent();
-            _customerService = customerService;
         }
 
         private void ManageCustomerButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new Customer(_customerService));
+            NavigationService?.Navigate(_customerManagementUI);
         }
 
         private void ManageBookingButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new Booking());
+            NavigationService?.Navigate(_bookingManagementUI);
         }
 
         private void ManageRoomButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new RoomManagementUI(_roomInformationService));
+            NavigationService?.Navigate(_roomManagementUI);
         }
     }
 }
