@@ -1,0 +1,38 @@
+﻿<Page x:Class="HotelWpfpApp.CustomerManagementUI"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:HotelWpfpApp"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="CustomerManagementUI">
+
+    <Grid x:Name="grdCustomerManagement" Background="White">
+        <!--Label-->
+
+        <Label x:Name="lblName" Content="Name" HorizontalAlignment="Left" Margin="40,115,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.454,-0.578"/>
+        <Label x:Name="lblPhone" Content="Phone Number" HorizontalAlignment="Left" Margin="38,181,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.454,-0.578"/>
+        <Label x:Name="lblAddress" Content="Email Address" HorizontalAlignment="Left" Margin="41,247,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.454,-0.578"/>
+        <Label x:Name="lblDob" Content="Date Of Birth" HorizontalAlignment="Left" Margin="46,309,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.454,-0.578"/>
+
+        <!--TextBox-->
+        <TextBox x:Name="txtName" HorizontalAlignment="Left" Margin="155,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" Height="26"/>
+        <TextBox x:Name="txtPhone" HorizontalAlignment="Left" Margin="158,181,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" Height="26"/>
+        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Margin="155,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" Height="26" RenderTransformOrigin="0.474,1.846"/>
+        <TextBox x:Name="txtDob" HorizontalAlignment="Left" Margin="155,309,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" Height="26" RenderTransformOrigin="0.526,1.154"/>
+
+        <!--Data Grid-->
+        <DataGrid x:Name="dgvCustomersList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="380,115,10,20"/>
+
+        <!--Button-->
+        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="42,385,0,0" VerticalAlignment="Top" FontSize="18" Height="30" Width="86" Background="#FF3C9321" Foreground="White"/>
+        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="164,385,0,0" VerticalAlignment="Top" FontSize="18" Height="30" Width="86" Background="#FF415FDA" Foreground="#FFFEFDFD"/>
+        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="278,385,0,0" VerticalAlignment="Top" FontSize="18" Height="30" Width="86" Background="#FFD22828" Foreground="#FFF7F4F4"/>
+        <Button x:Name="btnManageBooking" Content="Manage Booking" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35" Width="165" Margin="75,10,0,0" FontSize="14" FontWeight="Bold"/>
+        <Button x:Name="btnManageCustomer" Content="Manage Customer" HorizontalAlignment="Center" VerticalAlignment="Top" Height="35" Width="164" Margin="0,10,0,0" FontSize="14" FontWeight="Bold"/>
+        <Button x:Name="btnManageRoom" Content="Manage Room" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35" Width="165" Margin="570,10,0,0" FontSize="14" FontWeight="Bold"/>
+
+
+    </Grid>
+</Page>

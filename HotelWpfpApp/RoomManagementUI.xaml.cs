@@ -35,16 +35,6 @@ namespace HotelWpfpApp
             dgvRoomsList.ItemsSource = await _roomInformationService.GetAllRoomInformations();
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void grdRoomsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
 
     }
 }

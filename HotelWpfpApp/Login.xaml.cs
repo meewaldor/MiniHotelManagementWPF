@@ -12,14 +12,16 @@ namespace HotelWpfpApp
     /// </summary>
     public partial class Login : Page
     {
-        private CustomerService _customerService;
-        private readonly RoomInformationService _roomInformationService;
+        private readonly CustomerService _customerService;
+        private readonly Admin _admin;
+        private readonly Customer _customer;
 
-        public Login(CustomerService customerService, RoomInformationService roomInformationService)
+        public Login(CustomerService customerService, Admin admin, Customer customer)
         {
             _customerService = customerService;
+            _admin = admin;
+            _customer = customer;
             InitializeComponent();
-            _roomInformationService = roomInformationService;
         }
 
         private async void LoginButton_Click(object sender, RoutedEventArgs e)
@@ -33,13 +35,13 @@ namespace HotelWpfpApp
             {
                 if (customer.CustomerStatus == 2)
                 {
-                    // Chuyển đến trang Admin khi người dùng là admin
-                    NavigationService?.Navigate(new Admin(_roomInformationService));
+                    // role admin
+                    NavigationService?.Navigate(_admin);
                 }
                 else
                 {
-                    // Chuyển đến trang Customer khi người dùng không phải là admin
-                    NavigationService?.Navigate(new Customer());
+                    // role customer
+                    NavigationService?.Navigate(_customer);
                 }
             }
             else

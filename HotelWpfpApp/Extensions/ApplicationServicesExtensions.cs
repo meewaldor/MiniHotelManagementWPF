@@ -28,6 +28,11 @@ namespace JewelryWpfApp.Extensions
             services.AddScoped<RoomTypeRepository>();
 
             services.AddTransient<Login>();
+            services.AddTransient<Admin>();
+            services.AddTransient<Customer>();
+            services.AddTransient<CustomerManagementUI>();
+            services.AddTransient<RoomManagementUI>();
+            services.AddTransient<BookingManagementUI>();
 
             // AutoMapper
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
