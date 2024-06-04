@@ -22,15 +22,17 @@ namespace HotelWpfpApp
     public partial class Admin : Page
     {
         private readonly RoomInformationService _roomInformationService;
-        public Admin(RoomInformationService roomInformationService)
+        private readonly CustomerService _customerService;
+        public Admin(RoomInformationService roomInformationService, CustomerService customerService)
         {
             _roomInformationService = roomInformationService;
             InitializeComponent();
+            _customerService = customerService;
         }
 
         private void ManageCustomerButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new Customer());
+            NavigationService?.Navigate(new Customer(_customerService));
         }
 
         private void ManageBookingButton_Click(object sender, RoutedEventArgs e)

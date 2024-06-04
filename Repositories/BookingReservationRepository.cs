@@ -7,25 +7,13 @@ namespace Repositories
 {
     public class BookingReservationRepository : IBookingReservationRepositoty
     {
-        // Using Singleton Pattern
-        private static BookingReservationRepository instance = null;
-        private static readonly object instanceLock = new object();
-        private BookingReservationRepository() { }
-        public static BookingReservationRepository Instance
-        {
-            get
-            {
-                lock (instanceLock)
-                {
-                    if (instance == null)
-                    {
-                        instance = new BookingReservationRepository();
-                    }
-                    return instance;
-                }
-            }
-        }
         FuminiHotelManagementContext _context;
+
+        public BookingReservationRepository(FuminiHotelManagementContext context)
+        {
+            _context = context;            
+        }
+
         public bool AddBooking(BookingReservation b)
         {
             _context = new();

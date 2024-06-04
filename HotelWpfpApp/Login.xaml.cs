@@ -14,6 +14,9 @@ namespace HotelWpfpApp
     {
         private CustomerService _customerService;
         private readonly RoomInformationService _roomInformationService;
+        private Admin admin;
+        private Customer Customer;
+        private Booking Booking;
 
         public Login(CustomerService customerService, RoomInformationService roomInformationService)
         {
@@ -34,12 +37,12 @@ namespace HotelWpfpApp
                 if (customer.CustomerStatus == 2)
                 {
                     // Chuyển đến trang Admin khi người dùng là admin
-                    NavigationService?.Navigate(new Admin(_roomInformationService));
+                    NavigationService?.Navigate(new Admin(_roomInformationService, _customerService));
                 }
                 else
                 {
                     // Chuyển đến trang Customer khi người dùng không phải là admin
-                    NavigationService?.Navigate(new Customer());
+                    NavigationService?.Navigate(new Customer(_customerService));
                 }
             }
             else

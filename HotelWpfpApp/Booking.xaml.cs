@@ -28,7 +28,7 @@ namespace HotelWpfpApp
         public Booking()
         {
             InitializeComponent();
-            bookingService = new BookingService();
+            //bookingService = new BookingService();
             LoadBookingData();
         }
 
