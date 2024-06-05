@@ -23,7 +23,7 @@ namespace HotelWpfpApp
     /// </summary>
     public partial class Booking : Page
     {
-        private BookingService bookingService;
+        private BookingReservationService bookingService;
 
         public Booking()
         {

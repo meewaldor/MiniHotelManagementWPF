@@ -1,4 +1,5 @@
 ﻿using Services;
+using Services.Dtos;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -15,13 +16,13 @@ namespace HotelWpfpApp
         {
             InitializeComponent();
             _customerService = customerService;
-            LoadCustomerData();
+            //LoadCustomerData();
         }
 
-        private async void LoadCustomerData()
+        private async Task LoadCustomerData()
         {
-            //IEnumerable<CustomerDTO> customers = await customerService.GetAllCustomers();
-            //CustomerDataGrid.ItemsSource = customers;
+            IEnumerable<CustomerDTO> customers = await _customerService.GetAllCustomers();
+            CustomerDataGrid.ItemsSource = customers;
         }
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)

@@ -6,7 +6,9 @@ namespace Repositories.Interfaces
     public interface ICustomerRepository
     {
         Customer GetUserAccount(string email, string password);
-
-        public Task<IEnumerable<Customer>> GetAllCustomersConfig();
+        Task<IEnumerable<Customer>> GetAllCustomersConfig();
+        bool AddCustomer(Customer customer);
+        bool UpdateCustomer(Customer customer);
+        bool DeleteCustomer(Customer customer);
     }
 }

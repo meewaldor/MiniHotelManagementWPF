@@ -34,5 +34,25 @@ namespace Services
 
             return data;
         }
+
+        public bool AddCustomer(Customer customer)
+        {
+            return _customerRepository.AddCustomer(customer);
+        }
+
+        public bool UpdateCustomer(Customer customer)
+        {
+            return _customerRepository.UpdateCustomer(customer);
+        }
+
+        public bool DeleteCustomer(Customer customer) 
+        {
+            return _customerRepository.DeleteCustomer(customer);
+        }
+
+        public async Task<Customer> GetCustomerById(int id)
+        {
+            return await _customerRepository.GetCustomerById(id);
+        }
     }
 }

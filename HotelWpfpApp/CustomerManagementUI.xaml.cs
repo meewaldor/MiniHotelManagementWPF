@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Services.Dtos;
+using Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,21 @@ namespace HotelWpfpApp
     /// </summary>
     public partial class CustomerManagementUI : Page
     {
-        public CustomerManagementUI()
+        CustomerService _customerService;
+
+        public CustomerManagementUI(CustomerService customerService)
         {
             InitializeComponent();
+            _customerService = customerService;
+            LoadCustomerData();
+        }
+
+
+
+        private async Task LoadCustomerData()
+        {
+            IEnumerable<CustomerDTO> customers = await _customerService.GetAllCustomers();
+            dgvCustomersList.ItemsSource = customers;
         }
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Repositories;
 using Services;
+using System.Windows.Forms;
 
 namespace JewelryWpfApp.Extensions
 {
@@ -18,7 +19,8 @@ namespace JewelryWpfApp.Extensions
                     sqlOptions => sqlOptions.EnableRetryOnFailure());
             });
             // Services and ViewModels
-            services.AddScoped<BookingService>();
+            services.AddScoped<BookingReservationService>();
+            services.AddScoped<BookingDetailService>();
             services.AddScoped<CustomerService>();
             services.AddScoped<RoomInformationService>();
             services.AddScoped<RoomTypeServices>();
@@ -36,6 +38,8 @@ namespace JewelryWpfApp.Extensions
 
             // AutoMapper
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddDbContext<FuminiHotelManagementContext>(ServiceLifetime.Scoped);
 
             return services;
         }
