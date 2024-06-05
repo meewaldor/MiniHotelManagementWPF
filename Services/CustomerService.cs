@@ -50,9 +50,13 @@ namespace Services
             return _customerRepository.DeleteCustomer(customer);
         }
 
-        public async Task<Customer> GetCustomerById(int id)
+        public async Task<CustomerDTO> GetCustomerById(int id)
         {
-            return await _customerRepository.GetCustomerById(id);
+            var customer = await _customerRepository.GetCustomerById(id);
+
+            var data = _mapper.Map<Customer, CustomerDTO>(customer);
+
+            return data;
         }
     }
 }
