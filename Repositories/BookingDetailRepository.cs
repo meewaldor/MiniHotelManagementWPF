@@ -1,5 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Repositories.Entities;
 using Repositories.Interfaces;
 
@@ -7,25 +6,12 @@ namespace Repositories
 {
     public class BookingDetailRepository : IBookingDetailRepository
     {
-        // Using Singleton Pattern
-        private static BookingDetailRepository instance = null;
-        private static readonly object instanceLock = new object();
-        private BookingDetailRepository() { }
-        public static BookingDetailRepository Instance
-        {
-            get
-            {
-                lock (instanceLock)
-                {
-                    if (instance == null)
-                    {
-                        instance = new BookingDetailRepository();
-                    }
-                    return instance;
-                }
-            }
-        }
         FuminiHotelManagementContext _context;
+
+        public BookingDetailRepository(FuminiHotelManagementContext context)
+        {
+            _context = context;
+        }
         public bool AddBookingDetail(BookingDetail bookingDetail)
         {
             _context = new();

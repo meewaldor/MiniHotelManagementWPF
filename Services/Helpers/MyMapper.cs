@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+
+using Repositories.Dtos;
 using Repositories.Entities;
 using Services.Dtos;
 
@@ -8,7 +10,12 @@ namespace Services.Helpers
     {
         public MyMapper() 
         {
-            CreateMap<Customer, CustomerDTO>();    
+            CreateMap<Customer, CustomerDTO>();
+
+            CreateMap<BookingReservation, BookingReservationDTO>();
+
+            CreateMap<BookingDetail, BookingDetailDTO>();
+
         }
     }
 }

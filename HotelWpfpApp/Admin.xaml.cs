@@ -11,8 +11,8 @@ namespace HotelWpfpApp
         private readonly RoomManagementUI _roomManagementUI;
         private readonly BookingManagementUI _bookingManagementUI;
         private readonly CustomerManagementUI _customerManagementUI;
-        public Admin(RoomManagementUI roomManagementUI,CustomerManagementUI customerManagementUI, BookingManagementUI bookingManagementUI )
-        {
+        public Admin(RoomManagementUI roomManagementUI,CustomerManagementUI customerManagementUI, BookingManagementUI bookingManagementUI)
+        { 
             _roomManagementUI = roomManagementUI;
             _bookingManagementUI = bookingManagementUI;
             _customerManagementUI = customerManagementUI;

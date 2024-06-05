@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Services.Dtos
 {
-    public class RoomInfomationDTO
+    public class RoomInformationDTO
     {
         public int RoomId { get; set; }
 

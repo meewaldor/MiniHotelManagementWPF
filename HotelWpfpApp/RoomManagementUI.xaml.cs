@@ -35,7 +35,7 @@ namespace HotelWpfpApp
 
         private async Task FillDataGridView()
         {
-            dgvRoomsList.ItemsSource = null;
+            //dgvRoomsList.ItemsSource = null;
             dgvRoomsList.ItemsSource = await _roomInformationService.GetAllRoomInformations();
         }
 

@@ -1,14 +1,18 @@
-﻿using Repositories;
+﻿using AutoMapper;
+using Repositories;
 using Repositories.Entities;
+using Services.Dtos;
 
 namespace Services
 {
     public class RoomInformationService
     {
         private readonly RoomInformationRepository _roomInformationRepository;
-        public RoomInformationService (RoomInformationRepository roomInformationRepository)
+        private readonly IMapper _mapper;
+        public RoomInformationService (RoomInformationRepository roomInformationRepository, IMapper mapper)
         {
             _roomInformationRepository = roomInformationRepository;
+            _mapper = mapper;
         }
 
         public async Task<IEnumerable<RoomInformation>> GetAllRoomInformations()
@@ -16,13 +20,22 @@ namespace Services
             return await _roomInformationRepository.GetRoomInformations();
         }
 
-        public RoomInformation GetRoomInformationById(int id)
+        public RoomInformationDTO GetRoomInformationById(int roomId)
         {
-            return _roomInformationRepository.GetRoomInformationById(id);
+            var roomInfomations = _roomInformationRepository.GetRoomInformationById(roomId);
+
+            var data = _mapper.Map<RoomInformation, RoomInformationDTO>(roomInfomations);
+
+            return data;
         }
-        public async Task<IEnumerable<RoomInformation>> GetRoomInformationsByType(int roomTypeId)
+
+        public async Task<IEnumerable<RoomInformationDTO>> GetRoomInformationsByType(int roomTypeId)
         {
-            return await _roomInformationRepository.GetRoomInformationsByType(roomTypeId);
+            var roomInfomations = await _roomInformationRepository.GetRoomInformationsByType(roomTypeId);
+
+            var data = _mapper.Map< IEnumerable<RoomInformation>, IEnumerable<RoomInformationDTO>>(roomInfomations);
+
+            return data;
         }
 
         public bool AddRoomInformation (RoomInformation roomInformation)

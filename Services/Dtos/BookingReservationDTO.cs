@@ -9,11 +9,6 @@ namespace Repositories.Dtos
 {
     public class BookingReservationDTO
     {
-        public BookingReservationDTO()
-        {
-
-        }
-
         public int BookingReservationId { get; set; }
         public DateOnly? BookingDate { get; set; }
         public decimal? TotalPrice { get; set; }
