@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Repositories;
+using Repositories.Interfaces;
 using Services;
 
 namespace JewelryWpfApp.Extensions
@@ -22,8 +23,9 @@ namespace JewelryWpfApp.Extensions
             services.AddScoped<CustomerService>();
             services.AddScoped<RoomInformationService>();
             services.AddScoped<RoomTypeServices>();
+
             services.AddScoped<BookingReservationRepository>();
-            services.AddScoped<CustomerRepository>();
+            services.AddScoped<ICustomerRepository,CustomerRepository>();
             services.AddScoped<RoomInformationRepository>();
             services.AddScoped<RoomTypeRepository>();
 

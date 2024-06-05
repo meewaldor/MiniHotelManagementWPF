@@ -9,6 +9,7 @@
       Title="Admin">
 
     <Grid Background="#f5f5f5">
+        <Frame x:Name="frAdminMain" VerticalAlignment="Stretch" NavigationUIVisibility="Visible"/>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
             <TextBlock Text="Admin Page" FontSize="36" FontWeight="Bold" Foreground="#333333" Margin="0 0 0 20" HorizontalAlignment="Center"/>
             <Button Content="Manage Customer" Click="ManageCustomerButton_Click" FontSize="24" FontWeight="Bold" Background="#007ACC" Foreground="White" Height="50" Width="300" Margin="0 10"/>

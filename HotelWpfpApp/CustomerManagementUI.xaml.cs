@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,20 @@ namespace HotelWpfpApp
     /// </summary>
     public partial class CustomerManagementUI : Page
     {
-        public CustomerManagementUI()
+        CustomerService _customerService;
+        public CustomerManagementUI(CustomerService customerService)
         {
+            _customerService = customerService;
             InitializeComponent();
         }
+        private async void Page_Loaded (object sender, RoutedEventArgs e)
+        {
+            await FillDataGridView();
+        }
+        private async Task FillDataGridView()
+        {
+            dgvCustomersList.ItemsSource = await _customerService.GetAllCustomers();
+        }
+
     }
 }

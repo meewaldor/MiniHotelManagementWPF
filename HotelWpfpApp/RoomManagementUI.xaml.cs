@@ -26,15 +26,18 @@ namespace HotelWpfpApp
         {
             _roomInformationService = roomInformationService;
             InitializeComponent();
-            FillDataGridView();
         }
 
-        private async void FillDataGridView()
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            await FillDataGridView();
+        }
+
+        private async Task FillDataGridView()
         {
             dgvRoomsList.ItemsSource = null;
             dgvRoomsList.ItemsSource = await _roomInformationService.GetAllRoomInformations();
         }
-
 
     }
 }

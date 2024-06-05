@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Repositories.Entities;
+using Services.Dtos;
 
 namespace Services.Helpers
 {
@@ -6,7 +8,7 @@ namespace Services.Helpers
     {
         public MyMapper() 
         {
-            
+            CreateMap<Customer, CustomerDTO>();    
         }
     }
 }

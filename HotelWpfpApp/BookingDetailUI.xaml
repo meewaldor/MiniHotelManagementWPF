@@ -1,0 +1,77 @@
+﻿<Page x:Class="HotelWpfpApp.BookingDetailUI"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:HotelWpfpApp"
+      mc:Ignorable="d"
+      Title="BookingDetailUI" Height="490" Width="1060">
+
+    <Grid Background="White">
+        <StackPanel HorizontalAlignment="Left" Width="210" Background="#FFC7A882">
+            <TextBlock TextWrapping="Wrap" Height="95"/>
+            <Button Content="Manage Booking" Height="40" Width="215" Background="#FFC7A882" Foreground="White" FontSize="16" BorderThickness="0,0,0,1"/>
+            <Button Content="Manage Customer" Height="40" Width="210" Background="#FFC7A882" Foreground="White" FontSize="16" BorderThickness="0,0,0,1"/>
+            <Button Content="Manage Room" Height="40" Width="210" Background="#FFC7A882" Foreground="White" FontSize="16" BorderThickness="0,0,0,1"/>
+            <Button Content="Profile" Height="40" Width="210" Background="#FFC7A882" Foreground="White" FontSize="16" BorderThickness="0,0,0,1"/>
+
+            <TextBlock TextWrapping="Wrap" Height="200" Width="205"/>
+            <Button Content="Logout" Height="35" Width="210" Background="#FFC7A882" Foreground="White" FontSize="16" BorderThickness="0,0,0,0"/>
+        </StackPanel>
+        <StackPanel Margin="300,30,495,245" Background="White">
+            <Label Content="BOOKING INFORMATION" FontSize="16" Background="#FFF1E9E9"/>
+            <Label Content="Booking Reservation ID"/>
+            <TextBox x:Name="tbBookingId" TextWrapping="Wrap" Width="325" Height="23" BorderThickness="0,0,0,1" IsReadOnly="true"/>
+            <Label Content="Booking Date"/>
+            <TextBox x:Name="tbBookingDate" TextWrapping="Wrap" Width="325" Height="23" BorderThickness="0,0,0,1" IsReadOnly="true"/>
+            <Label Content="Booking Status"/>
+            <TextBox x:Name="tbBookingStatus" TextWrapping="Wrap" Width="325" Height="23" BorderThickness="0,0,0,1" IsReadOnly="true"/>
+        </StackPanel>
+        <StackPanel Margin="295,260,495,25" Background="White">
+            <Label Content="CUSTOMER INFORMATION" FontSize="16" Background="#FFF1E9E9"/>
+            <Label Content="Customer Name"/>
+            <TextBox x:Name="tbCustomerName" TextWrapping="Wrap" Width="325" Height="23" BorderThickness="0,0,0,1" IsReadOnly="true"/>
+            <Label Content="Phone"/>
+            <TextBox x:Name="tbPhone" TextWrapping="Wrap" Width="325" Height="23" BorderThickness="0,0,0,1" IsReadOnly="true"/>
+            <Label Content="Email"/>
+            <TextBox x:Name="tbEmail" TextWrapping="Wrap" Width="325" Height="23" BorderThickness="0,0,0,1" IsReadOnly="true"/>
+        </StackPanel>
+        <Grid HorizontalAlignment="Left" Height="420" Margin="620,30,0,0" VerticalAlignment="Top" Width="410" Background="White">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.25*"/>
+                <ColumnDefinition Width="0.25*"/>
+                <ColumnDefinition Width="0.25*"/>
+                <ColumnDefinition Width="0.25*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="BOOKING DETAILS" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"  FontSize="16" Background="#FFF1E9E9"/>
+            <Label Content="Room Type:" Grid.Row="1" Grid.Column="0" Margin="0,20"/>
+            <Label Content="Room Number:" Grid.Row="1" Grid.Column="2" Margin="0,20"/>
+            <Label Content="Check in:" Grid.Row="2" Grid.Column="0" Margin="0,20"/>
+            <Label Content="Check out:" Grid.Row="2" Grid.Column="2" Margin="0,20"/>
+            <Label Content="Max Capacity:" Grid.Row="3" Grid.Column="0" Margin="0,20"/>
+            <Label Content="Price Per Day:" Grid.Row="4" Grid.Column="0" Margin="0,20"/>
+            <Label Content="TOTAL PRICE:" Grid.Row="5" Grid.Column="2" FontWeight="Bold" Margin="0,20"/>
+
+            <TextBox x:Name="tbRoomType" Grid.Row="1" Grid.Column="1" Margin="5,20" TextWrapping="Wrap" BorderThickness="0,0,0,1" IsReadOnly="true"/>
+            <TextBox x:Name="tbRoomNumber" Grid.Row="1" Grid.Column="3" Margin="5,20" TextWrapping="Wrap" BorderThickness="0,0,0,1" IsReadOnly="true"/>
+            <TextBox x:Name="tbCheckin" Grid.Row="2" Grid.Column="1" Margin="5,20" TextWrapping="Wrap" BorderThickness="0,0,0,1" IsReadOnly="true"/>
+            <TextBox x:Name="tbCheckout" Grid.Row="2" Grid.Column="3" Margin="5,20" TextWrapping="Wrap" BorderThickness="0,0,0,1" IsReadOnly="true"/>
+            <TextBox x:Name="tbCapacity" Grid.Row="3" Grid.Column="1" Margin="5,20" TextWrapping="Wrap" BorderThickness="0,0,0,1" IsReadOnly="true"/>
+            <TextBox x:Name="tbPricePerDay" Grid.Row="4" Grid.Column="1" Margin="5,20" TextWrapping="Wrap" BorderThickness="0,0,0,1" IsReadOnly="true"/>
+            <TextBlock x:Name="txtTotalPrice" Grid.Row="5" Grid.Column="3" Margin="5,20" TextWrapping="Wrap"/>
+
+        </Grid>
+
+
+    </Grid>
+</Page>

@@ -4,9 +4,25 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HotelWpfpApp"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="BookingManagementUI">
+      mc:Ignorable="d"
+      Title="BookingManagementUI" Height="490" Width="1060">
+    
+    <Grid Background="White">
+        <StackPanel HorizontalAlignment="Left" Width="210" Background="#FFC7A882">
+            <TextBlock TextWrapping="Wrap" Height="95"/>
+            <Button Content="Manage Booking" Height="40" Width="215" Background="#FFC7A882" Foreground="White" FontSize="16" BorderThickness="0,0,0,1"/>
+            <Button Content="Manage Customer" Height="40" Width="210" Background="#FFC7A882" Foreground="White" FontSize="16" BorderThickness="0,0,0,1"/>
+            <Button Content="Manage Room" Height="40" Width="210" Background="#FFC7A882" Foreground="White" FontSize="16" BorderThickness="0,0,0,1"/>
+            <Button Content="Profile" Height="40" Width="210" Background="#FFC7A882" Foreground="White" FontSize="16" BorderThickness="0,0,0,1"/>
 
-    <Grid/>
+            <TextBlock TextWrapping="Wrap" Height="200" Width="205"/>
+            <Button Content="Logout" Height="35" Width="210" Background="#FFC7A882" Foreground="White" FontSize="16" BorderThickness="0,0,0,0"/>
+        </StackPanel>
+
+        <!--Data Grid-->
+        <DataGrid x:Name="dgvBookingsList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="250,160,35,35"/>
+        <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Height="30" Margin="250,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="420"/>
+        <Button x:Name="btnSearch" Content="SEARCH" HorizontalAlignment="Left" Height="30" Margin="700,100,0,0" VerticalAlignment="Top" Width="75" Background="#FFCA9840" BorderThickness="0,0,0,0" Foreground="White" RenderTransformOrigin="0.533,1.333"/>
+        <Label Content="BOOKING LIST" Height="35" Margin="545,25,0,0" VerticalAlignment="Top" Width="428" FontSize="22" HorizontalAlignment="Left"/>
+    </Grid>
 </Page>
