@@ -21,7 +21,7 @@
             <Button x:Name="btnNavProfile" Content="Profile" Height="40" Background="#FFC7A882" Foreground="White" FontSize="16" BorderThickness="0,0,0,1" Click="btnNavProfile_Click"/>
 
             <TextBlock TextWrapping="Wrap" Height="200" />
-            <Button x:Name="btnLogout" Content="Logout" Height="35" Background="#FFC7A882" Foreground="White" FontSize="16" BorderThickness="0,0,0,0"/>
+            <Button x:Name="btnLogout" Content="Logout" Height="35" Background="#FFC7A882" Foreground="White" FontSize="16" BorderThickness="0,0,0,0" Click="btnLogout_Click"/>
         </StackPanel>
     </Grid>
 

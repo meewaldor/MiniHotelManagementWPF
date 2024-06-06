@@ -27,7 +27,7 @@
                 <Label Content="Booking Status"/>
                 <TextBox x:Name="tbBookingStatus" TextWrapping="Wrap" Height="30" BorderThickness="0,0,0,1" IsReadOnly="true"/>
             </StackPanel>
-            <StackPanel Grid.Row="1" Grid.Column="0" Background="White" Margin="10">
+            <StackPanel Grid.Row="0" Grid.Column="1" Background="White" Margin="10">
                 <Label Content="CUSTOMER INFORMATION" FontSize="16" Background="#FFF1E9E9"/>
                 <Label Content="Customer Name"/>
                 <TextBox x:Name="tbCustomerName" TextWrapping="Wrap" Height="30" BorderThickness="0,0,0,1" IsReadOnly="true"/>
@@ -36,7 +36,10 @@
                 <Label Content="Email"/>
                 <TextBox x:Name="tbEmail" TextWrapping="Wrap" Height="30" BorderThickness="0,0,0,1" IsReadOnly="true"/>
             </StackPanel>
-            <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Background="White" Margin="10">
+            <DataGrid x:Name="dgBookingDetails" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">
+                
+            </DataGrid>
+            <!--<Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Background="White" Margin="10">
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -70,7 +73,7 @@
                 <TextBox x:Name="tbPricePerDay" Grid.Row="4" Grid.Column="1" Margin="5,20" TextWrapping="Wrap" BorderThickness="0,0,0,1" IsReadOnly="true"/>
                 <TextBlock x:Name="txtTotalPrice" Grid.Row="5" Grid.Column="3" Margin="5,20" TextWrapping="Wrap"/>
 
-            </Grid>
+            </Grid>-->
         </Grid>
         
 

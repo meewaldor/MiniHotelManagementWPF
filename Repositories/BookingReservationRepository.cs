@@ -16,21 +16,18 @@ namespace Repositories
 
         public bool AddBooking(BookingReservation b)
         {
-            _context = new();
             _context.Add(b);
             return _context.SaveChanges() > 0;
         }
 
         public bool DeleteBooking(BookingReservation b)
         {
-            _context = new();
             _context.Remove(b);
             return _context.SaveChanges() > 0;
         }
 
         public async Task<IEnumerable<BookingReservation>> GetAllBookings()
         {
-            _context = new();
             return await _context.BookingReservations
             .Include(b => b.Customer) 
             .Include(b => b.BookingDetails) 
@@ -39,15 +36,24 @@ namespace Repositories
             .ToListAsync();
         }
 
+        public async Task<IEnumerable<BookingReservation>> SearchBookings(string searchvalue)
+        {
+            return await _context.BookingReservations
+                .Where(b => b.Customer.CustomerFullName.Contains(searchvalue) || b.Customer.Telephone.Contains(searchvalue) || b.BookingReservationId.ToString() == searchvalue)
+            .Include(b => b.Customer)
+            .Include(b => b.BookingDetails)
+            .ThenInclude(b => b.Room)
+            .ThenInclude(b => b.RoomType)
+            .ToListAsync();
+        }
+
         public BookingReservation GetBookingById(int id)
         {
-            _context = new();
             return _context.BookingReservations.Find(id);
         }
 
         public async Task<IEnumerable<BookingReservation>> GetBookingsByCustomerId(int customerId)
         {
-            _context = new();
             return await _context.BookingReservations
                 .Where(b => b.CustomerId == customerId)
                 .ToListAsync();
@@ -55,7 +61,6 @@ namespace Repositories
 
         public bool UpdateBooking(BookingReservation b)
         {
-            _context = new();
             _context.Update(b);
             return _context.SaveChanges() > 0;
         }

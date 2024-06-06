@@ -26,6 +26,15 @@ namespace Services
             return data;
         }
 
+        public async Task<IEnumerable<BookingReservationDTO>> SearchBookings(string searchValue)
+        {
+            var bookingReservations = await _bookingReservationRepository.SearchBookings(searchValue);
+
+            var data = _mapper.Map<IEnumerable<BookingReservation>, IEnumerable<BookingReservationDTO>>(bookingReservations);
+
+            return data;
+        }
+
         public bool AddBooking(BookingReservation bookingReservation)
         {
             return _bookingReservationRepository.AddBooking(bookingReservation);

@@ -43,5 +43,10 @@ namespace HotelWpfpApp
         {
             
         }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

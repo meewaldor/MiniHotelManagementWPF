@@ -46,5 +46,12 @@ namespace HotelWpfpApp
                 _selected = null;
             }
         }
+
+        private async void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            var searchValue = txtSearch.Text;
+            dgvBookingsList.ItemsSource = await _bookingReservationService.SearchBookings(searchValue);
+        }
+
     }
 }

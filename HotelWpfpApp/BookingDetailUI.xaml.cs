@@ -42,15 +42,11 @@ namespace HotelWpfpApp
                 tbBookingDate.Text = bookingReservationDTO.BookingDate.ToString();
                 tbBookingId.Text = bookingReservationDTO.BookingReservationId.ToString();
                 tbBookingStatus.Text = bookingReservationDTO.BookingStatus;
-                tbCheckin.Text = bookingReservationDTO.BookingDetails[0].StartDate.ToString();
-                tbCheckout.Text = bookingReservationDTO.BookingDetails[0].EndDate.ToString();
                 tbCustomerName.Text = bookingReservationDTO.CustomerName;
                 tbPhone.Text = bookingReservationDTO.CustomerPhone;
-                tbRoomType.Text = bookingReservationDTO.BookingDetails[0].Room.RoomType.RoomTypeName;
-                tbRoomNumber.Text = bookingReservationDTO.BookingDetails[0].Room.RoomNumber;
-                tbCapacity.Text = bookingReservationDTO.BookingDetails[0].Room.RoomMaxCapacity.ToString();
-                tbPricePerDay.Text = bookingReservationDTO.BookingDetails[0].Room.RoomPricePerDay.ToString();
-                txtTotalPrice.Text = bookingReservationDTO.TotalPrice.ToString();
+
+                dgBookingDetails.ItemsSource = bookingReservationDTO.BookingDetails;
+                //txtTotalPrice.Text = bookingReservationDTO.TotalPrice.ToString();
             }
             
         }
