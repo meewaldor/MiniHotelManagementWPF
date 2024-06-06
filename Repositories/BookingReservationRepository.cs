@@ -39,7 +39,7 @@ namespace Repositories
         public async Task<IEnumerable<BookingReservation>> SearchBookings(string searchvalue)
         {
             return await _context.BookingReservations
-                .Where(b => b.Customer.CustomerFullName.Contains(searchvalue) || b.Customer.Telephone.Contains(searchvalue) || b.BookingReservationId.ToString() == searchvalue)
+                .Where(b => b.BookingReservationId.ToString() == searchvalue || b.Customer.CustomerFullName.Contains(searchvalue) || b.Customer.Telephone.Contains(searchvalue))
             .Include(b => b.Customer)
             .Include(b => b.BookingDetails)
             .ThenInclude(b => b.Room)

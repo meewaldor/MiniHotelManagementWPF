@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.Extensions.DependencyInjection;
 using Repositories;
 using Repositories.Entities;
 using Services;
@@ -14,15 +15,14 @@ namespace HotelWpfpApp
     public partial class Login : Window
     {
         private readonly CustomerService _customerService;
-        private readonly MainWindow _mainWindow;
-        //private readonly RoomManagementUI _roomManagementUI;
+        private readonly IServiceProvider _serviceProvider;
 
-        public Login(CustomerService customerService, MainWindow mainWindow)
+        public Login(CustomerService customerService, IServiceProvider serviceProvider)
         {
+            _serviceProvider = serviceProvider;
             _customerService = customerService;
-            _mainWindow = mainWindow;
-            //_roomManagementUI = roomManagementUI;
-            InitializeComponent();            
+            InitializeComponent();
+            
         }
 
         private async void LoginButton_Click(object sender, RoutedEventArgs e)
@@ -37,8 +37,8 @@ namespace HotelWpfpApp
                 if (customer.CustomerStatus == 2)
                 {
                     // role admin
-                    //NavigationService?.Navigate(_mainWindow);
-                    _mainWindow.Show();
+                    var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
+                    mainWindow.Show();
                     this.Close();
                     //frLogin.Content = _roomManagementUI;
                 }
