@@ -5,24 +5,28 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HotelWpfpApp"
       mc:Ignorable="d"
-      Title="BookingManagementUI" Height="490" Width="1060">
-    
+      Title="BookingManagementUI"
+      Loaded="Page_Loaded">
+
     <Grid Background="White">
-        <StackPanel HorizontalAlignment="Left" Width="210" Background="#FFC7A882">
-            <TextBlock TextWrapping="Wrap" Height="95"/>
-            <Button Content="Manage Booking" Height="40" Width="215" Background="#FFC7A882" Foreground="White" FontSize="16" BorderThickness="0,0,0,1"/>
-            <Button Content="Manage Customer" Height="40" Width="210" Background="#FFC7A882" Foreground="White" FontSize="16" BorderThickness="0,0,0,1"/>
-            <Button Content="Manage Room" Height="40" Width="210" Background="#FFC7A882" Foreground="White" FontSize="16" BorderThickness="0,0,0,1"/>
-            <Button Content="Profile" Height="40" Width="210" Background="#FFC7A882" Foreground="White" FontSize="16" BorderThickness="0,0,0,1"/>
+        <StackPanel Margin="20">
+            <Label Content="BOOKING LIST"  FontSize="22"/>
+            <Grid Margin="0 20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="txtSearch" TextWrapping="Wrap" Grid.Column="0" Height="30"/>
+                <Button x:Name="btnSearch" Content="SEARCH" Background="#FFCA9840" BorderThickness="0,0,0,0" Foreground="White" Grid.Column="1"/>
+            </Grid>
 
-            <TextBlock TextWrapping="Wrap" Height="200" Width="205"/>
-            <Button Content="Logout" Height="35" Width="210" Background="#FFC7A882" Foreground="White" FontSize="16" BorderThickness="0,0,0,0"/>
+            <DataGrid x:Name="dgvBookingsList" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="dgvBookingsList_SelectionChanged"/>
+
         </StackPanel>
-
         <!--Data Grid-->
-        <DataGrid x:Name="dgvBookingsList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="250,160,35,35"/>
-        <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Height="30" Margin="250,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="420"/>
-        <Button x:Name="btnSearch" Content="SEARCH" HorizontalAlignment="Left" Height="30" Margin="700,100,0,0" VerticalAlignment="Top" Width="75" Background="#FFCA9840" BorderThickness="0,0,0,0" Foreground="White" RenderTransformOrigin="0.533,1.333"/>
-        <Label Content="BOOKING LIST" Height="35" Margin="545,25,0,0" VerticalAlignment="Top" Width="428" FontSize="22" HorizontalAlignment="Left"/>
+
+
+
     </Grid>
 </Page>

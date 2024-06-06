@@ -22,11 +22,22 @@ namespace HotelWpfpApp
     public partial class RoomManagementUI : Page
     {
         RoomInformationService _roomInformationService;
+        BookingManagementUI _bookingManagementUI;
+        CustomerManagementUI _customerManagementUI;
+        //public RoomManagementUI(RoomInformationService roomInformationService, BookingManagementUI bookingManagementUI, CustomerManagementUI customerManagementUI)
+        //{
+        //    _roomInformationService = roomInformationService;
+        //    _bookingManagementUI = bookingManagementUI;
+        //    _customerManagementUI = customerManagementUI;
+        //    InitializeComponent();          
+        //}
+
         public RoomManagementUI(RoomInformationService roomInformationService)
         {
             _roomInformationService = roomInformationService;
             InitializeComponent();
         }
+
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -39,5 +50,14 @@ namespace HotelWpfpApp
             dgvRoomsList.ItemsSource = await _roomInformationService.GetAllRoomInformations();
         }
 
+        private void btnNavBooking_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(_bookingManagementUI);
+        }
+
+        private void btnNavCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(_customerManagementUI);
+        }
     }
 }

@@ -26,9 +26,12 @@ namespace HotelWpfpApp
             serviceCollection.AddApplicationServices(config);
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
-            var navigationWindow = new NavigationWindow();
-            navigationWindow.Content = serviceProvider.GetRequiredService<Login>();
-            navigationWindow.Show();
+            //var navigationWindow = new NavigationWindow();
+            //navigationWindow.Content = serviceProvider.GetRequiredService<Login>();
+            //navigationWindow.Show();
+
+            var loginWindow = serviceProvider.GetRequiredService<Login>();
+            loginWindow.Show();
         }
     }
 

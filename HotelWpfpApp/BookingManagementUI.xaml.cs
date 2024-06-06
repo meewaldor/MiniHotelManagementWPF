@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Repositories.Dtos;
+using Services;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace HotelWpfpApp
 {
@@ -20,9 +11,38 @@ namespace HotelWpfpApp
     /// </summary>
     public partial class BookingManagementUI : Page
     {
-        public BookingManagementUI()
+        private BookingReservationDTO _selected = null;
+        private readonly BookingReservationService _bookingReservationService;
+        public BookingManagementUI(BookingReservationService bookingReservationService)
         {
+            _bookingReservationService = bookingReservationService;
             InitializeComponent();
+        }
+
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            await FillDataGridView();
+        }
+        private async Task FillDataGridView()
+        {
+            dgvBookingsList.ItemsSource = await _bookingReservationService.GetAllBookingReservations();
+        }
+
+        private async void dgvBookingsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (dgvBookingsList.SelectedItems.Count > 0)
+            {
+                _selected = (BookingReservationDTO) dgvBookingsList.SelectedItems[0];
+                BookingDetailUI bookingDetailUI = new BookingDetailUI(_bookingReservationService);
+                bookingDetailUI.bookingReservationDTO = _selected;
+                bookingDetailUI.ShowDialog();
+
+                await FillDataGridView();
+            }
+            else
+            {
+                _selected = null;
+            }
         }
     }
 }

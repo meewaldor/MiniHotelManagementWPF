@@ -34,6 +34,8 @@ namespace Repositories
             return await _context.BookingReservations
             .Include(b => b.Customer) 
             .Include(b => b.BookingDetails) 
+            .ThenInclude(b => b.Room)
+            .ThenInclude( b => b.RoomType)
             .ToListAsync();
         }
 

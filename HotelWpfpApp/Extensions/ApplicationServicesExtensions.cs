@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Repositories;
 using Repositories.Interfaces;
 using Services;
+using System.Windows.Controls;
 using System.Windows.Forms;
 
 namespace JewelryWpfApp.Extensions
@@ -32,11 +33,13 @@ namespace JewelryWpfApp.Extensions
             services.AddScoped<RoomTypeRepository>();
 
             services.AddTransient<Login>();
-            services.AddTransient<Admin>();
-            services.AddTransient<Customer>();
             services.AddTransient<CustomerManagementUI>();
             services.AddTransient<RoomManagementUI>();
             services.AddTransient<BookingManagementUI>();
+            services.AddTransient<BookingDetailUI>();
+            
+            services.AddTransient<MainWindow>();
+            services.AddTransient<Frame>();
 
             // AutoMapper
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

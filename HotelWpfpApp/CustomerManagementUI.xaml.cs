@@ -1,11 +1,6 @@
-<<<<<<< HEAD
-﻿using Services;
 using Services.Dtos;
-
-=======
-﻿using Services.Dtos;
 using Services;
->>>>>>> 76b8d08d81e7b8d04a7d5087360fab09f32beda9
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,16 +28,6 @@ namespace HotelWpfpApp
         {
             _customerService = customerService;
             InitializeComponent();
-            _customerService = customerService;
-            LoadCustomerData();
-        }
-
-
-
-        private async Task LoadCustomerData()
-        {
-            IEnumerable<CustomerDTO> customers = await _customerService.GetAllCustomers();
-            dgvCustomersList.ItemsSource = customers;
         }
         private async void Page_Loaded (object sender, RoutedEventArgs e)
         {

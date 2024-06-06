@@ -5,54 +5,81 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HotelWpfpApp"
       mc:Ignorable="d"
-      Title="RoomManagementUI"
-      Loaded="Page_Loaded" Height="490" Width="1060">
+      Loaded="Page_Loaded">
 
-    <Grid x:Name="grdRoomManagement" Background="White">
-        <Label Content="ROOM MANAGEMENT" HorizontalAlignment="Left" Height="40" Margin="321,35,0,0" VerticalAlignment="Top" Width="510" FontSize="22"/>
-        <Grid Margin="240,122,470,38">
-            <!--Label-->
+    <Grid x:Name="grdRoomManagement" Background="White" Margin="10">
+
+        <Grid Margin="0,0,0,30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Content="ROOM MANAGEMENT"  FontSize="22"/>
+            <Grid Grid.Column="0" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <!--Label-->
+                <Label x:Name="lblRoomNumber" Content="Room Number" Grid.Column="0" Grid.Row="0"/>
+                <Label x:Name="lblDescription" Content="Description" Grid.Column="0" Grid.Row="1"/>
+                <Label x:Name="lblMaxCapacity" Content="Max Capacity" Grid.Column="0" Grid.Row="2"/>
+                <Label x:Name="lblPrice" Content="Price Per Day" Grid.Column="0" Grid.Row="3"/>
+                <Label x:Name="lblRoomType" Content="Room Type" Grid.Column="0" Grid.Row="4"/>
+
+                <!--TextBox-->
+                <TextBox x:Name="txtRoomNumber" TextWrapping="Wrap" Height="30" Margin="0,10" Grid.Column="1" Grid.Row="0"/>
+                <TextBox x:Name="txtDescription" TextWrapping="Wrap" Height="30" Margin="0,10" Grid.Column="1" Grid.Row="1"/>
+                <TextBox x:Name="txtCapacity" TextWrapping="Wrap" Height="30" Margin="0,10" Grid.Column="1" Grid.Row="2"/>
+                <TextBox x:Name="txtPrice" TextWrapping="Wrap" Height="30" Margin="0,10" Grid.Column="1" Grid.Row="3"/>
+                <ComboBox x:Name="cbRoomType" Height="30" Grid.Column="1" Margin="0,10" Grid.Row="4"/>
+                <!--Button-->
 
 
-            <Label x:Name="lblRoomNumber" Content="Room Number" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0"/>
-            <Label x:Name="lblDescription" Content="Description" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,57,0,0" RenderTransformOrigin="0.498,1.117"/>
-            <Label x:Name="lblMaxCapacity" Content="Max Capacity" HorizontalAlignment="Left" Margin="-1,109,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="lblPrice" Content="Price Per Day" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.442,1.559" Margin="0,162,0,0"/>
-            <Label x:Name="lblRoomType" Content="Room Type" HorizontalAlignment="Left" Margin="1,212,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.433,-2.095"/>
+            </Grid>
+            <Grid Grid.Row="2" Grid.Column="0" Margin="0 10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-            <!--TextBox-->
-            <TextBox x:Name="txtRoomNumber" HorizontalAlignment="Left" Margin="131,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" Height="26"/>
-            <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Margin="131,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" Height="26"/>
-            <TextBox x:Name="txtCapacity" HorizontalAlignment="Left" Margin="131,109,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" Height="26"/>
-            <TextBox x:Name="txtPrice" HorizontalAlignment="Left" Margin="131,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" Height="26"/>
-            <ComboBox x:Name="cbRoomType" HorizontalAlignment="Left" Margin="131,212,0,0" VerticalAlignment="Top" Width="190" Height="23"/>
-            <!--Button-->
-            <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Height="30" Width="86" Background="#FFC7A882" Foreground="White" Margin="2,270,0,0"/>
-            <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Height="30" Width="86" Background="White" Foreground="#FFC7A882" FontWeight="Bold" Margin="120,270,0,0"/>
-            <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Height="30" Width="86" Background="#FF902626" Foreground="White" Margin="235,270,0,0"/>
+                <Button x:Name="btnAdd" Grid.Column="0" Content="Add" FontSize="18" Height="30" Width="86" Background="#FFC7A882" Foreground="White"/>
+                <Button x:Name="btnUpdate" Grid.Column="1" Content="Update" FontSize="18" Height="30" Width="86" Background="White" Foreground="#FFC7A882" FontWeight="Bold" />
+                <Button x:Name="btnDelete" Grid.Column="2" Content="Delete" FontSize="18" Height="30" Width="86" Background="#FF902626" Foreground="White" />
+            </Grid>
 
+            <Grid Grid.Row="0" Grid.Column="1" Margin="20 10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBox x:Name="txtSearch" Grid.Column="0" Height="30"/>
+                <Button x:Name="btnSearch" Grid.Column="1" Content="Search" FontSize="18" Background="#FFC7A882" Foreground="White" />
+
+            </Grid>
+            <DataGrid Grid.Column="1" Grid.Row="1" x:Name="dgvRoomsList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="20 10"/>
         </Grid>
 
-
-        <!--Data Grid-->
-        <DataGrid x:Name="dgvRoomsList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="595,122,10,30"/>
         
-        <StackPanel HorizontalAlignment="Left" Width="210" Background="#FFC7A882">
-            <TextBlock TextWrapping="Wrap" Height="95"/>
-            <Button Content="Manage Booking" Height="40" Width="215" Background="#FFC7A882" Foreground="White" FontSize="16" BorderThickness="0,0,0,1"/>
-            <Button Content="Manage Customer" Height="40" Width="210" Background="#FFC7A882" Foreground="White" FontSize="16" BorderThickness="0,0,0,1"/>
-            <Button Content="Manage Room" Height="40" Width="210" Background="#FFC7A882" Foreground="White" FontSize="16" BorderThickness="0,0,0,1"/>
-            <Button Content="Profile" Height="40" Width="210" Background="#FFC7A882" Foreground="White" FontSize="16" BorderThickness="0,0,0,1"/>
-
-            <TextBlock TextWrapping="Wrap" Height="200" Width="205"/>
-            <Button Content="Logout" Height="35" Width="210" Background="#FFC7A882" Foreground="White" FontSize="16" BorderThickness="0,0,0,0"/>
-        </StackPanel>
-        <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Height="30" Margin="595,75,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="360"/>
-        <Button x:Name="btnSearch" Content="Search" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Height="30" Width="76" Background="#FFC7A882" Foreground="White" Margin="974,75,0,0"/>
-
-
-
-
 
     </Grid>
 </Page>

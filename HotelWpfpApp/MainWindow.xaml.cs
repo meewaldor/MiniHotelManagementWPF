@@ -1,13 +1,6 @@
-﻿using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace HotelWpfpApp
 {
@@ -16,9 +9,38 @@ namespace HotelWpfpApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        RoomManagementUI _roomManagementUI;
+        BookingManagementUI _bookingManagementUI;
+        CustomerManagementUI _customerManagementUI;
+        BookingDetailUI _bookingDetailUI;
+        public MainWindow(RoomManagementUI roomManagementUI, BookingManagementUI bookingManagementUI, CustomerManagementUI customerManagementUI, BookingDetailUI bookingDetailUI)
         {
+            _bookingManagementUI = bookingManagementUI;            
+            _customerManagementUI = customerManagementUI;
+            _roomManagementUI = roomManagementUI;
+            _bookingDetailUI = bookingDetailUI;
             InitializeComponent();
+            
+        }
+
+        private void btnNavBooking_Click(object sender, RoutedEventArgs e)
+        {
+            frMain.Content = _bookingManagementUI;
+        }
+
+        private void btnNavCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            frMain.Content = _customerManagementUI;
+        }
+
+        private void btnNavRoom_Click(object sender, RoutedEventArgs e)
+        {
+            frMain.Content = _roomManagementUI;
+        }
+
+        private void btnNavProfile_Click(object sender, RoutedEventArgs e)
+        {
+            frMain.Content = _bookingDetailUI;
         }
     }
 }
