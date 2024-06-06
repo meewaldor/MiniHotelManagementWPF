@@ -12,17 +12,18 @@ namespace HotelWpfpApp
         RoomManagementUI _roomManagementUI;
         BookingManagementUI _bookingManagementUI;
         CustomerManagementUI _customerManagementUI;
-        BookingDetailUI _bookingDetailUI;
         public MainWindow(RoomManagementUI roomManagementUI, BookingManagementUI bookingManagementUI, CustomerManagementUI customerManagementUI, BookingDetailUI bookingDetailUI)
         {
             _bookingManagementUI = bookingManagementUI;            
             _customerManagementUI = customerManagementUI;
             _roomManagementUI = roomManagementUI;
-            _bookingDetailUI = bookingDetailUI;
             InitializeComponent();
             
         }
-
+        private void StartWindow(object sender, EventArgs e)
+        {
+            frMain.Content = _roomManagementUI;
+        }
         private void btnNavBooking_Click(object sender, RoutedEventArgs e)
         {
             frMain.Content = _bookingManagementUI;
@@ -40,7 +41,7 @@ namespace HotelWpfpApp
 
         private void btnNavProfile_Click(object sender, RoutedEventArgs e)
         {
-            frMain.Content = _bookingDetailUI;
+            
         }
     }
 }

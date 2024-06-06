@@ -13,10 +13,12 @@ namespace HotelWpfpApp
     {
         private BookingReservationDTO _selected = null;
         private readonly BookingReservationService _bookingReservationService;
-        public BookingManagementUI(BookingReservationService bookingReservationService)
+        private readonly BookingDetailUI _bookingDetailUI;
+        public BookingManagementUI(BookingReservationService bookingReservationService, BookingDetailUI bookingDetailUI)
         {
             _bookingReservationService = bookingReservationService;
             InitializeComponent();
+            _bookingDetailUI = bookingDetailUI;
         }
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
@@ -33,9 +35,9 @@ namespace HotelWpfpApp
             if (dgvBookingsList.SelectedItems.Count > 0)
             {
                 _selected = (BookingReservationDTO) dgvBookingsList.SelectedItems[0];
-                BookingDetailUI bookingDetailUI = new BookingDetailUI(_bookingReservationService);
-                bookingDetailUI.bookingReservationDTO = _selected;
-                bookingDetailUI.ShowDialog();
+                //BookingDetailUI bookingDetailUI = new BookingDetailUI(_bookingReservationService);
+                _bookingDetailUI.bookingReservationDTO = _selected;
+                _bookingDetailUI.ShowDialog();
 
                 await FillDataGridView();
             }
