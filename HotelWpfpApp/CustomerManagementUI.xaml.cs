@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Repositories.Entities;
 
 namespace HotelWpfpApp
 {
@@ -38,5 +39,11 @@ namespace HotelWpfpApp
             dgvCustomersList.ItemsSource = await _customerService.GetAllCustomers();
         }
 
+        private async void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            string searchValue = txtSearch.Text;
+
+            dgvCustomersList.ItemsSource = await _customerService.GetCustomerBySearchValue(searchValue);
+        }
     }
 }

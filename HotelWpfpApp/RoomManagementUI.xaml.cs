@@ -1,4 +1,5 @@
-﻿using Services;
+﻿using Repositories.Entities;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,6 +59,67 @@ namespace HotelWpfpApp
         private void btnNavCustomer_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(_customerManagementUI);
+        }
+
+        private async void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            string searchValue = txtSearch.Text;
+
+            dgvRoomsList.ItemsSource = await _roomInformationService.GetRoomInformationsBySearchValue(searchValue);
+        }
+
+        private void dgvRoomsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            var roomNumber = txtRoomNumber.Text;
+            var description = txtDescription.Text;
+            var maxCapacity = txtCapacity.Text;
+            var pricePerDay = txtPrice.Text;
+            var roomTypeId = cbRoomType.SelectedIndex;
+
+            RoomInformation roomInformation = new RoomInformation 
+            { 
+                RoomNumber = roomNumber,RoomDetailDescription = description,
+                RoomMaxCapacity = Convert.ToInt32(maxCapacity),
+                RoomTypeId = 1,
+                RoomStatus = 1,
+                RoomPricePerDay = Convert.ToDecimal(pricePerDay)
+            };    
+            
+            _roomInformationService.AddRoomInformation(roomInformation);
+
+            FillDataGridView();
+        }
+
+        private async void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            var roomId = txtRoomId.Text;    
+            var roomNumber = txtRoomNumber.Text;
+            var description = txtDescription.Text;
+            var maxCapacity = txtCapacity.Text;
+            var pricePerDay = txtPrice.Text;
+            var roomTypeId = cbRoomType.SelectedIndex;
+
+           
+
+            RoomInformation roomInformation = new RoomInformation
+            {
+                RoomId = Convert.ToInt32(roomId),
+                RoomNumber = roomNumber,
+                RoomDetailDescription = description,
+                RoomMaxCapacity = Convert.ToInt32(maxCapacity),
+                RoomTypeId = 1,
+                RoomStatus = 1,
+                RoomPricePerDay = Convert.ToDecimal(pricePerDay)
+            };
+
+            _roomInformationService.UpdateRoomInformation(roomInformation);
+
+            FillDataGridView();
         }
     }
 }

@@ -46,10 +46,10 @@ namespace Repositories
             return _context.SaveChanges() > 0;
         }
 
-        public async Task<IEnumerable<RoomInformation>> GetRoomInformationsByType(int roomTypeId)
+        public async Task<IEnumerable<RoomInformation>> GetRoomInformationsBySearchValue(string searchValue)
         {
             return await _context.RoomInformations
-                .Where(r => r.RoomTypeId == roomTypeId)
+                .Where(r => r.RoomNumber.Contains(searchValue) || r.RoomType.RoomTypeName.Contains(searchValue))
                 .ToListAsync();
         }
     }

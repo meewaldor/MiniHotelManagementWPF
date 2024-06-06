@@ -8,5 +8,7 @@ namespace Repositories.Interfaces
         Customer? GetUserAccount(string email, string password);
 
         Task<IEnumerable<Customer>> GetAllCustomersConfig();
+
+        Task<IEnumerable<Customer>> GetCustomerBySearchValue(string searchValue);
     }
 }

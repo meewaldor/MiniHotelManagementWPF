@@ -19,7 +19,7 @@
                     <ColumnDefinition Width="4*"/>
                 </Grid.ColumnDefinitions>
                 <TextBox x:Name="txtSearch" TextWrapping="Wrap" Grid.Column="0" Height="30"/>
-                <Button x:Name="btnSearch" Content="SEARCH" Background="#FFCA9840" BorderThickness="0,0,0,0" Foreground="White" Grid.Column="1"/>
+                <Button x:Name="btnSearch" Content="SEARCH" Background="#FFCA9840" BorderThickness="0,0,0,0" Foreground="White" Grid.Column="1" Click="SearchButton_Click"/>
             </Grid>
 
             <DataGrid x:Name="dgvCustomersList" d:ItemsSource="{d:SampleData ItemCount=5}"/>

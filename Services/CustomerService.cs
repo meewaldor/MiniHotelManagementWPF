@@ -6,6 +6,7 @@ using Repositories.Entities;
 using Repositories.Interfaces;
 using Services.Dtos;
 using Services.Helpers;
+using System.Collections.Generic;
 
 namespace Services
 {
@@ -33,6 +34,15 @@ namespace Services
             var data = _mapper.Map<IEnumerable<Customer>,IEnumerable<CustomerDTO>>(customers);
 
             return data;
+        }
+
+        public async Task<IEnumerable<CustomerDTO>> GetCustomerBySearchValue(string searchValue)
+        {
+            var customers = await _customerRepository.GetCustomerBySearchValue(searchValue);
+
+            var customerData = _mapper.Map<IEnumerable<Customer>, IEnumerable<CustomerDTO>>(customers);
+
+            return customerData;
         }
     }
 }
