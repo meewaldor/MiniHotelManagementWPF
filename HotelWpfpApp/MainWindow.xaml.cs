@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Services;
+using System.Windows;
 using System.Windows.Controls;
 
 
@@ -12,11 +14,13 @@ namespace HotelWpfpApp
         RoomManagementUI _roomManagementUI;
         BookingManagementUI _bookingManagementUI;
         CustomerManagementUI _customerManagementUI;
-        public MainWindow(RoomManagementUI roomManagementUI, BookingManagementUI bookingManagementUI, CustomerManagementUI customerManagementUI, BookingDetailUI bookingDetailUI)
+        IServiceProvider _serviceProvider;
+        public MainWindow(IServiceProvider serviceProvider, RoomManagementUI roomManagementUI, BookingManagementUI bookingManagementUI, CustomerManagementUI customerManagementUI, BookingDetailUI bookingDetailUI)
         {
             _bookingManagementUI = bookingManagementUI;            
             _customerManagementUI = customerManagementUI;
             _roomManagementUI = roomManagementUI;
+            _serviceProvider = serviceProvider;
             InitializeComponent();
             
         }
@@ -47,6 +51,8 @@ namespace HotelWpfpApp
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+            var loginWindow = _serviceProvider.GetRequiredService<Login>();
+            loginWindow.Show();
         }
     }
 }
