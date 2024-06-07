@@ -25,7 +25,7 @@ namespace Services.Helpers
 
             CreateMap<RoomInformation, RoomInformationDTO>()
                 .ForMember(d => d.RoomTypeName, o => o.MapFrom(s => s.RoomType.RoomTypeName));
-
+            CreateMap<RoomInformationDTO, RoomInformation>();
         }
     }
 }

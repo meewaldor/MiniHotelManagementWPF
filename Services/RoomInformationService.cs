@@ -52,9 +52,11 @@ namespace Services
             return _roomInformationRepository.UpdateRoomInformation (roomInformation);
         }
 
-        public bool DeleteRoomInformation (RoomInformation roomInformation)
+        public bool DeleteRoomInformation (RoomInformationDTO roomInformationDto)
         {
-            return _roomInformationRepository.DeleteRoomInformation (roomInformation);
+            var roomInformation = _mapper.Map<RoomInformation>(roomInformationDto);
+            roomInformation.RoomStatus = 0;
+            return _roomInformationRepository.UpdateRoomInformation (roomInformation);
         }
 
     }

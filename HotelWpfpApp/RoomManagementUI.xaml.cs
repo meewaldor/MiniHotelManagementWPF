@@ -1,19 +1,10 @@
 ﻿using Repositories.Entities;
 using Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Services.Dtos;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace HotelWpfpApp
 {
@@ -22,10 +13,9 @@ namespace HotelWpfpApp
     /// </summary>
     public partial class RoomManagementUI : Page
     {
-        RoomInformationService _roomInformationService;
-        BookingManagementUI _bookingManagementUI;
-        CustomerManagementUI _customerManagementUI;
-        RoomTypeServices _roomTypeServices;
+        private readonly RoomInformationService _roomInformationService;
+        private readonly RoomTypeServices _roomTypeServices;
+        private RoomInformationDTO _selected;
 
         public RoomManagementUI(RoomInformationService roomInformationService, RoomTypeServices roomTypeServices)
         {
@@ -44,22 +34,13 @@ namespace HotelWpfpApp
         {
             //dgvRoomsList.ItemsSource = null;
             dgvRoomsList.ItemsSource = await _roomInformationService.GetAllRoomInformations();
+
             // Load room type to combox
             cbRoomType.ItemsSource = await _roomTypeServices.GetAllRoomTypes();
             cbRoomType.DisplayMemberPath = "RoomTypeName";
-            cbRoomType.SelectedValue = "RoomTypeId";
+            cbRoomType.SelectedValuePath = "RoomTypeId";
             cbRoomType.SelectedIndex = 0;
             
-        }
-
-        private void btnNavBooking_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(_bookingManagementUI);
-        }
-
-        private void btnNavCustomer_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(_customerManagementUI);
         }
 
         private async void SearchButton_Click(object sender, RoutedEventArgs e)
@@ -71,56 +52,100 @@ namespace HotelWpfpApp
 
         private void dgvRoomsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if (dgvRoomsList.SelectedItems.Count > 0)
+            {
+                _selected = (RoomInformationDTO)dgvRoomsList.SelectedItems[0];
+            }           
         }
 
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        private async void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             var roomNumber = txtRoomNumber.Text;
             var description = txtDescription.Text;
             var maxCapacity = txtCapacity.Text;
             var pricePerDay = txtPrice.Text;
-            var roomTypeId = cbRoomType.SelectedIndex;
-
+            var roomTypeId = cbRoomType.SelectedValue;
+            
             RoomInformation roomInformation = new RoomInformation 
             { 
                 RoomNumber = roomNumber,RoomDetailDescription = description,
                 RoomMaxCapacity = Convert.ToInt32(maxCapacity),
-                RoomTypeId = 1,
+                RoomTypeId = Convert.ToInt32(roomTypeId),
                 RoomStatus = 1,
                 RoomPricePerDay = Convert.ToDecimal(pricePerDay)
             };    
             
-            _roomInformationService.AddRoomInformation(roomInformation);
+            if(_roomInformationService.AddRoomInformation(roomInformation))
+                MessageBox.Show("Successully Added!");
+            else
+                MessageBox.Show("Fail to add!");
 
-            FillDataGridView();
+            await FillDataGridView();
         }
 
         private async void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            var roomId = txtRoomId.Text;    
-            var roomNumber = txtRoomNumber.Text;
-            var description = txtDescription.Text;
-            var maxCapacity = txtCapacity.Text;
-            var pricePerDay = txtPrice.Text;
-            var roomTypeId = cbRoomType.SelectedIndex;
-
-           
-
-            RoomInformation roomInformation = new RoomInformation
+            if (_selected == null)
             {
-                RoomId = Convert.ToInt32(roomId),
-                RoomNumber = roomNumber,
-                RoomDetailDescription = description,
-                RoomMaxCapacity = Convert.ToInt32(maxCapacity),
-                RoomTypeId = 1,
-                RoomStatus = 1,
-                RoomPricePerDay = Convert.ToDecimal(pricePerDay)
-            };
+                MessageBox.Show("Please select a certain room to delete!");
+            }
+            else
+            {
+                var roomId = txtRoomId.Text;
+                var roomNumber = txtRoomNumber.Text;
+                var description = txtDescription.Text;
+                var maxCapacity = txtCapacity.Text;
+                var pricePerDay = txtPrice.Text;
+                var roomTypeId = cbRoomType.SelectedValue;
 
-            _roomInformationService.UpdateRoomInformation(roomInformation);
+                RoomInformation roomInformation = new RoomInformation
+                {
+                    RoomId = Convert.ToInt32(roomId),
+                    RoomNumber = roomNumber,
+                    RoomDetailDescription = description,
+                    RoomMaxCapacity = Convert.ToInt32(maxCapacity),
+                    RoomTypeId = Convert.ToInt32(roomTypeId),
+                    RoomStatus = 1,
+                    RoomPricePerDay = Convert.ToDecimal(pricePerDay)
+                };
 
-            FillDataGridView();
+                if (_roomInformationService.UpdateRoomInformation(roomInformation))
+                {
+                    MessageBox.Show("Successfully Updated!");
+                    await FillDataGridView();
+                }                   
+                else
+                    MessageBox.Show("Fail to update!");               
+            }           
+        }
+
+        private void txtRoomNumber_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void NumberValidation(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^1-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private async void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (_selected == null)
+            {
+                MessageBox.Show("Please select a certain room to delete!");
+            }
+            else
+            {
+                if (_roomInformationService.DeleteRoomInformation(_selected))
+                {
+                    MessageBox.Show("Successfully Deleted!");
+                    await FillDataGridView();
+                }                    
+                else
+                    MessageBox.Show("Fail to delete!");
+            }          
         }
     }
 }

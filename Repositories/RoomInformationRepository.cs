@@ -18,6 +18,7 @@ namespace Repositories
         public async Task<IEnumerable<RoomInformation>> GetRoomInformations ()
         {
             return await _context.RoomInformations
+                .Where(r => r.RoomStatus != 0)
                 .Include(r => r.RoomType)
                 .ToListAsync();
         }
@@ -25,6 +26,7 @@ namespace Repositories
         public RoomInformation GetRoomInformationById (int id)
         {
             return _context.RoomInformations
+                .Where(r => r.RoomStatus != 0)
                 .Include(r => r.RoomType)
                 .FirstOrDefault(r => r.RoomId == id);
         }
@@ -35,21 +37,32 @@ namespace Repositories
         }
 
         public bool UpdateRoomInformation (RoomInformation roomInformation)
-        {;
-            _context.Update(roomInformation);
-            return _context.SaveChanges() > 0;
+        {
+            var existingRoom = _context.RoomInformations.Find(roomInformation.RoomId);
+            if (existingRoom != null)
+            {
+                _context.Entry(existingRoom).CurrentValues.SetValues(roomInformation);
+                return _context.SaveChanges() > 0;
+            }
+            return false;
         }
 
         public bool DeleteRoomInformation (RoomInformation roomInformation) 
         {
-            _context.Remove(roomInformation);
-            return _context.SaveChanges() > 0;
+            var existingRoom = _context.RoomInformations.Find(roomInformation.RoomId);
+            if (existingRoom != null)
+            {
+                existingRoom.RoomStatus = 0;
+                _context.Entry(existingRoom).CurrentValues.SetValues(existingRoom);
+                return _context.SaveChanges() > 0;
+            }
+            return false;
         }
 
         public async Task<IEnumerable<RoomInformation>> GetRoomInformationsBySearchValue(string searchValue)
         {
             return await _context.RoomInformations
-                .Where(r => r.RoomNumber.Contains(searchValue) || r.RoomType.RoomTypeName.Contains(searchValue))
+                .Where(r => (r.RoomNumber.Contains(searchValue) || r.RoomType.RoomTypeName.Contains(searchValue)) && r.RoomStatus !=0)
                 .ToListAsync();
         }
     }

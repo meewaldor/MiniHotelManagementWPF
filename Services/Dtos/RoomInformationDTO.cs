@@ -18,6 +18,7 @@ namespace Services.Dtos
         public int? RoomMaxCapacity { get; set; }
 
         public string? RoomTypeName { get; set; }
+        public int RoomTypeId { get; set; }
 
         public byte? RoomStatus { get; set; }
 
