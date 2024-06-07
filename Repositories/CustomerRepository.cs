@@ -31,14 +31,12 @@ namespace Repositories
 
         public bool AddCustomer(Customer customer)
         {
-            _context = new();
             _context.Add(customer);
             return _context.SaveChanges() > 0;
         }
 
         public bool UpdateCustomer(Customer customer)
         {
-            _context = new();
             _context.Update(customer);
             return _context.SaveChanges() > 0;
         }
@@ -49,11 +47,14 @@ namespace Repositories
         //    return await _context.BookingReservations.Find(bookingReservationId);
         //}
 
-        public async Task<Customer> GetCustomerById(int customerId)
+        public async Task<IEnumerable<Customer>> GetCustomerBySearchValue(string searchValue)
         {
-            _context = new();
             return await _context.Customers
-                .FirstOrDefaultAsync(c => c.CustomerId == customerId);
+                .Where(c => c.CustomerId.ToString() == searchValue ||
+                c.CustomerFullName.Contains(searchValue)|| 
+                c.Telephone.Contains(searchValue) || 
+                c.EmailAddress.Contains(searchValue))
+                .ToListAsync();
         }
 
         public bool DeleteCustomer(Customer customer)

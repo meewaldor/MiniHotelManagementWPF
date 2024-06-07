@@ -15,9 +15,13 @@ namespace Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<RoomInformation>> GetAllRoomInformations()
+        public async Task<IEnumerable<RoomInformationDTO>> GetAllRoomInformations()
         {
-            return await _roomInformationRepository.GetRoomInformations();
+            var roomInfomations = await _roomInformationRepository.GetRoomInformations();
+
+            var data = _mapper.Map<IEnumerable<RoomInformation>, IEnumerable<RoomInformationDTO>>(roomInfomations);
+
+            return data;
         }
 
         public RoomInformationDTO GetRoomInformationById(int roomId)
@@ -29,11 +33,11 @@ namespace Services
             return data;
         }
 
-        public async Task<IEnumerable<RoomInformationDTO>> GetRoomInformationsByType(int roomTypeId)
+        public async Task<IEnumerable<RoomInformationDTO>> GetRoomInformationsBySearchValue(string searchValue)
         {
-            var roomInfomations = await _roomInformationRepository.GetRoomInformationsByType(roomTypeId);
+            var roomInfomations = await _roomInformationRepository.GetRoomInformationsBySearchValue(searchValue);
 
-            var data = _mapper.Map< IEnumerable<RoomInformation>, IEnumerable<RoomInformationDTO>>(roomInfomations);
+            var data = _mapper.Map<IEnumerable<RoomInformation>, IEnumerable<RoomInformationDTO>>(roomInfomations);
 
             return data;
         }

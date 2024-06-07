@@ -23,6 +23,9 @@ namespace Services.Helpers
                 .ForMember(d => d.MaxCapacity, o => o.MapFrom(s => s.Room.RoomMaxCapacity))
                 .ForMember(d => d.PricePerDay, o => o.MapFrom(s => s.Room.RoomPricePerDay));
 
+            CreateMap<RoomInformation, RoomInformationDTO>()
+                .ForMember(d => d.RoomTypeName, o => o.MapFrom(s => s.RoomType.RoomTypeName));
+
         }
     }
 }
