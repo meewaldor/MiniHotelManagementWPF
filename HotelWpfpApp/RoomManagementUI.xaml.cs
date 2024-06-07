@@ -24,17 +24,12 @@ namespace HotelWpfpApp
         RoomInformationService _roomInformationService;
         BookingManagementUI _bookingManagementUI;
         CustomerManagementUI _customerManagementUI;
-        //public RoomManagementUI(RoomInformationService roomInformationService, BookingManagementUI bookingManagementUI, CustomerManagementUI customerManagementUI)
-        //{
-        //    _roomInformationService = roomInformationService;
-        //    _bookingManagementUI = bookingManagementUI;
-        //    _customerManagementUI = customerManagementUI;
-        //    InitializeComponent();          
-        //}
+        RoomTypeServices _roomTypeServices;
 
-        public RoomManagementUI(RoomInformationService roomInformationService)
+        public RoomManagementUI(RoomInformationService roomInformationService, RoomTypeServices roomTypeServices)
         {
             _roomInformationService = roomInformationService;
+            _roomTypeServices = roomTypeServices;
             InitializeComponent();
         }
 
@@ -48,6 +43,12 @@ namespace HotelWpfpApp
         {
             //dgvRoomsList.ItemsSource = null;
             dgvRoomsList.ItemsSource = await _roomInformationService.GetAllRoomInformations();
+            // Load room type to combox
+            cbRoomType.ItemsSource = await _roomTypeServices.GetAllRoomTypes();
+            cbRoomType.DisplayMemberPath = "RoomTypeName";
+            cbRoomType.SelectedValue = "RoomTypeId";
+            cbRoomType.SelectedIndex = 0;
+            
         }
 
         private void btnNavBooking_Click(object sender, RoutedEventArgs e)
