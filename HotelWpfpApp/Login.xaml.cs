@@ -25,7 +25,7 @@ namespace HotelWpfpApp
             
         }
 
-        private async void LoginButton_Click(object sender, RoutedEventArgs e)
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             string username = UsernameTextBox.Text;
             string password = PasswordBox.Password;
@@ -34,18 +34,20 @@ namespace HotelWpfpApp
 
             if (customer != null)
             {
+                _customerService.Customer = customer;
                 if (customer.CustomerStatus == 2)
                 {
                     // role admin
                     var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
                     mainWindow.Show();
                     this.Close();
-                    //frLogin.Content = _roomManagementUI;
                 }
                 else
                 {
                     // role customer
-                    //NavigationService?.Navigate(_customer);
+                    var mainWindow = _serviceProvider.GetRequiredService<CustomerMainUI>();
+                    mainWindow.Show();
+                    this.Close();
                 }
             }
             else

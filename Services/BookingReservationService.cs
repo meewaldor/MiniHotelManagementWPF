@@ -3,16 +3,15 @@ using Repositories;
 using Repositories.Dtos;
 using Repositories.Entities;
 using Repositories.Interfaces;
-using Services.Dtos;
 
 namespace Services
 {
     public class BookingReservationService
     {
-        private readonly BookingReservationRepository _bookingReservationRepository;
+        private readonly IBookingReservationRepository _bookingReservationRepository;
         private readonly IMapper _mapper;
 
-        public BookingReservationService(BookingReservationRepository bookingReservationRepository, IMapper mapper) 
+        public BookingReservationService(IBookingReservationRepository bookingReservationRepository, IMapper mapper) 
         {
             _bookingReservationRepository = bookingReservationRepository;
             _mapper = mapper;
@@ -49,9 +48,13 @@ namespace Services
             return _bookingReservationRepository.DeleteBooking(bookingReservation);
         }
 
-        public async Task<IEnumerable<BookingReservation>> GetBookingReservationsByCustomerId(int customerId)
+        public async Task<IEnumerable<BookingReservationDTO>> GetBookingReservationsByCustomerId(int customerId)
         {
-            return await _bookingReservationRepository.GetBookingsByCustomerId(customerId);
+            var bookingReservations = await _bookingReservationRepository.GetBookingsByCustomerId(customerId);
+
+            var data = _mapper.Map<IEnumerable<BookingReservation>, IEnumerable<BookingReservationDTO>>(bookingReservations);
+
+            return data;
         }
         public BookingReservation GetBookingReservationById(int id)
         {

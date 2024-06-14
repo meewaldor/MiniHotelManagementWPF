@@ -1,6 +1,10 @@
 ﻿using JewelryWpfApp.Extensions;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Repositories;
+using System.Configuration;
 using System.IO;
 using System.Windows;
 using System.Windows.Navigation;
@@ -12,6 +16,8 @@ namespace HotelWpfpApp
     /// </summary>
     public partial class App : Application
     {
+        public IServiceProvider ServiceProvider { get; private set; }
+        public IConfiguration Configuration { get; private set; }
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -24,13 +30,9 @@ namespace HotelWpfpApp
             var config = builder.Build();
 
             serviceCollection.AddApplicationServices(config);
-            var serviceProvider = serviceCollection.BuildServiceProvider();
+            ServiceProvider = serviceCollection.BuildServiceProvider();
 
-            //var navigationWindow = new NavigationWindow();
-            //navigationWindow.Content = serviceProvider.GetRequiredService<Login>();
-            //navigationWindow.Show();
-
-            var loginWindow = serviceProvider.GetRequiredService<Login>();
+            var loginWindow = ServiceProvider.GetRequiredService<Login>();
             loginWindow.Show();
         }
     }

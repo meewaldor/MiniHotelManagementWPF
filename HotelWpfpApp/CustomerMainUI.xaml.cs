@@ -1,41 +1,33 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Services;
 using System.Windows;
-using System.Windows.Controls;
 
 
 namespace HotelWpfpApp
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for CustomerMainUI.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CustomerMainUI : Window
     {
         RoomManagementUI _roomManagementUI;
         BookingManagementUI _bookingManagementUI;
-        CustomerManagementUI _customerManagementUI;
+        MyProfileUI _profileUI;
         IServiceProvider _serviceProvider;
-        public MainWindow(IServiceProvider serviceProvider, RoomManagementUI roomManagementUI, BookingManagementUI bookingManagementUI, CustomerManagementUI customerManagementUI)
+        public CustomerMainUI(IServiceProvider serviceProvider, RoomManagementUI roomManagementUI, BookingManagementUI bookingManagementUI, MyProfileUI profileUI)
         {
-            _bookingManagementUI = bookingManagementUI;            
-            _customerManagementUI = customerManagementUI;
+            _bookingManagementUI = bookingManagementUI;
             _roomManagementUI = roomManagementUI;
+            _profileUI = profileUI;
             _serviceProvider = serviceProvider;
             InitializeComponent();
-            
         }
         private void StartWindow(object sender, EventArgs e)
         {
-            frMain.Content = _roomManagementUI;
+            frMain.Content = _bookingManagementUI;
         }
         private void btnNavBooking_Click(object sender, RoutedEventArgs e)
         {
             frMain.Content = _bookingManagementUI;
-        }
-
-        private void btnNavCustomer_Click(object sender, RoutedEventArgs e)
-        {
-            frMain.Content = _customerManagementUI;
         }
 
         private void btnNavRoom_Click(object sender, RoutedEventArgs e)
@@ -45,7 +37,7 @@ namespace HotelWpfpApp
 
         private void btnNavProfile_Click(object sender, RoutedEventArgs e)
         {
-            
+            frMain.Content = _profileUI;
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)

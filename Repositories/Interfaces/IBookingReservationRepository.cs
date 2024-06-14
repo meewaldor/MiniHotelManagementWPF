@@ -2,7 +2,7 @@
 
 namespace Repositories.Interfaces
 {
-    public interface IBookingReservationRepositoty
+    public interface IBookingReservationRepository
     {
         bool AddBooking(BookingReservation b);
         Task<IEnumerable<BookingReservation>> GetAllBookings();

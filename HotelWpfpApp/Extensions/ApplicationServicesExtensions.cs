@@ -17,34 +17,37 @@ namespace JewelryWpfApp.Extensions
             // DbContext
             services.AddDbContext<FuminiHotelManagementContext>(opt =>
             {
-                opt.UseSqlServer(config.GetConnectionString("DBDefault"),
-                    sqlOptions => sqlOptions.EnableRetryOnFailure());
+                opt.UseSqlServer(config.GetConnectionString("DBDefault"));
             });
+
             // Services and ViewModels
+            //services.AddScoped<DbContext,FuminiHotelManagementContext>();
+
             services.AddScoped<BookingReservationService>();
             services.AddScoped<BookingDetailService>();
             services.AddScoped<CustomerService>();
             services.AddScoped<RoomInformationService>();
             services.AddScoped<RoomTypeServices>();
 
-            services.AddScoped<BookingReservationRepository>();
+            services.AddScoped<IBookingReservationRepository, BookingReservationRepository>();
             services.AddScoped<ICustomerRepository,CustomerRepository>();
-            services.AddScoped<RoomInformationRepository>();
-            services.AddScoped<RoomTypeRepository>();
+            services.AddScoped<IRoomInformationRepository, RoomInformationRepository>();
+            services.AddScoped<IRoomTypeRepository, RoomTypeRepository>();
 
             services.AddTransient<Login>();
-            services.AddTransient<CustomerManagementUI>();
-            services.AddTransient<RoomManagementUI>();
-            services.AddTransient<BookingManagementUI>();
-            services.AddTransient<BookingDetailUI>();
-            
+            services.AddScoped<CustomerManagementUI>();
+            services.AddScoped<RoomManagementUI>();
+            services.AddScoped<BookingManagementUI>();
+            services.AddScoped<BookingDetailUI>();
+            services.AddTransient<CustomerMainUI>();
+            services.AddScoped<MyProfileUI>();
+
             services.AddTransient<MainWindow>();
-            services.AddTransient<Frame>();
 
             // AutoMapper
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddDbContext<FuminiHotelManagementContext>(ServiceLifetime.Scoped);
+            //services.AddDbContext<FuminiHotelManagementContext>(ServiceLifetime.Scoped);
 
             return services;
         }

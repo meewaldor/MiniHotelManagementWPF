@@ -10,15 +10,15 @@
 
     <Grid Background="#FF92857A">
         <Frame x:Name="frLogin" VerticalAlignment="Stretch" NavigationUIVisibility="Visible"/>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="320" Background="White" Height="410">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="350" Background="White" Height="410">
             <TextBlock Text="LOGIN" FontSize="24" Foreground="#333333" Margin="0 20 0 20" HorizontalAlignment="Center"/>
             <StackPanel Margin="0 20" Height="262">
-                <Label Content="Username" FontSize="16" Foreground="#333333"  Width="290"/>
-                <TextBox x:Name="UsernameTextBox"  TextWrapping="Wrap" Height="30
-                         " FontSize="18" BorderThickness="0,0,0,1" BorderBrush="#999999" Width="290"/>
-                <Label Content="Password" FontSize="16" Foreground="#333333"  Width="290"/>
-                <PasswordBox x:Name="PasswordBox" Height="30" FontSize="18" BorderThickness="0,0,0,1" BorderBrush="#999999"  Width="290"/>
-                <Button Content="Login" Click="LoginButton_Click" FontSize="22" Background="#FF174665" Foreground="White" Height="46" Margin="0 50" Width="290"/>
+                <Label Content="Username" FontSize="16" Foreground="#333333"  Width="320"/>
+                <TextBox x:Name="UsernameTextBox"  TextWrapping="Wrap" Height="50
+                         " FontSize="18" BorderThickness="0,0,0,1" BorderBrush="#999999" Width="320"/>
+                <Label Content="Password" FontSize="16" Foreground="#333333"  Width="320"/>
+                <PasswordBox x:Name="PasswordBox" Height="50" FontSize="18" BorderThickness="0,0,0,1" BorderBrush="#999999"  Width="320"/>
+                <Button Content="Login" Click="LoginButton_Click" FontSize="22" Background="#FF174665" Foreground="White" Height="46" Margin="0 50" Width="320"/>
             </StackPanel>
         </StackPanel>
     </Grid>

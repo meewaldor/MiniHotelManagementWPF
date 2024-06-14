@@ -1,13 +1,14 @@
 ﻿
 using Repositories;
 using Repositories.Entities;
+using Repositories.Interfaces;
 
 namespace Services
 {
     public class RoomTypeServices
     {
-        private readonly RoomTypeRepository _roomTypeRepository;
-        public RoomTypeServices (RoomTypeRepository roomTypeRepository)
+        private readonly IRoomTypeRepository _roomTypeRepository;
+        public RoomTypeServices (IRoomTypeRepository roomTypeRepository)
         {
             _roomTypeRepository = roomTypeRepository;
         }

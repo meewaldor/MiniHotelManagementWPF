@@ -11,6 +11,6 @@ namespace Services.Dtos
 
         public string? EmailAddress { get; set; }
 
-        public string? CustomerBirthday { get; set; }
+        public DateOnly CustomerBirthday { get; set; }
     }
 }

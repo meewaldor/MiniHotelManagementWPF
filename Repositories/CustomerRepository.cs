@@ -8,7 +8,7 @@ namespace Repositories
 {
     public class CustomerRepository : ICustomerRepository
     {      
-        FuminiHotelManagementContext _context;
+        private readonly FuminiHotelManagementContext _context;
 
         public CustomerRepository (FuminiHotelManagementContext context)
         {
@@ -18,14 +18,19 @@ namespace Repositories
         // Get account by email and password
         public Customer? GetUserAccount(string email, string password)
         {
-            return _context.Customers.FirstOrDefault(
-                account => account.EmailAddress.Equals(email) && account.Password.Equals(password)
+            return _context.Customers
+                .FirstOrDefault(
+                account => account.EmailAddress.Equals(email) 
+                && account.Password.Equals(password)
+                && account.CustomerStatus != 0
                 );
         }
 
         public async Task<IEnumerable<Customer>> GetAllCustomersConfig()
         {
             return await _context.Customers
+            //.AsNoTracking()
+            .Where(c => c.CustomerStatus == 1)
             .ToListAsync();
         }
 
@@ -37,7 +42,8 @@ namespace Repositories
 
         public bool UpdateCustomer(Customer customer)
         {
-            _context.Update(customer);
+            _context.Attach(customer);
+            _context.Entry(customer).State = EntityState.Modified;
             return _context.SaveChanges() > 0;
         }
 
@@ -50,16 +56,23 @@ namespace Repositories
         public async Task<IEnumerable<Customer>> GetCustomerBySearchValue(string searchValue)
         {
             return await _context.Customers
-                .Where(c => c.CustomerId.ToString() == searchValue ||
+                .Where(c => c.CustomerStatus == 1 && (c.CustomerId.ToString() == searchValue ||
                 c.CustomerFullName.Contains(searchValue)|| 
                 c.Telephone.Contains(searchValue) || 
-                c.EmailAddress.Contains(searchValue))
+                c.EmailAddress.Contains(searchValue)))
                 .ToListAsync();
         }
 
         public bool DeleteCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+            _context.Attach(customer);
+            _context.Entry(customer).State = EntityState.Modified;
+            return _context.SaveChanges() > 0;
+        }
+
+        public Customer? GetCustomerById(int customerId)
+        {
+            return _context.Customers.Find(customerId);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Repositories.Entities;
+﻿using Microsoft.IdentityModel.Tokens;
+using Repositories.Entities;
 using Services;
 using Services.Dtos;
 using System.Text.RegularExpressions;
@@ -15,7 +16,7 @@ namespace HotelWpfpApp
     {
         private readonly RoomInformationService _roomInformationService;
         private readonly RoomTypeServices _roomTypeServices;
-        private RoomInformationDTO _selected;
+        private RoomInformationDTO _selected = null;
 
         public RoomManagementUI(RoomInformationService roomInformationService, RoomTypeServices roomTypeServices)
         {
@@ -54,8 +55,21 @@ namespace HotelWpfpApp
         {
             if (dgvRoomsList.SelectedItems.Count > 0)
             {
-                _selected = (RoomInformationDTO)dgvRoomsList.SelectedItems[0];
-            }           
+                try
+                {
+                    _selected = (RoomInformationDTO)dgvRoomsList.SelectedItems[0];
+                }
+                catch
+                {
+                    MessageBox.Show("Please select a valid row!",
+                    "Warning",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                }             
+            }
+            else
+            {
+                _selected = null;
+            }
         }
 
         private async void btnAdd_Click(object sender, RoutedEventArgs e)
@@ -65,42 +79,11 @@ namespace HotelWpfpApp
             var maxCapacity = txtCapacity.Text;
             var pricePerDay = txtPrice.Text;
             var roomTypeId = cbRoomType.SelectedValue;
-            
-            RoomInformation roomInformation = new RoomInformation 
-            { 
-                RoomNumber = roomNumber,RoomDetailDescription = description,
-                RoomMaxCapacity = Convert.ToInt32(maxCapacity),
-                RoomTypeId = Convert.ToInt32(roomTypeId),
-                RoomStatus = 1,
-                RoomPricePerDay = Convert.ToDecimal(pricePerDay)
-            };    
-            
-            if(_roomInformationService.AddRoomInformation(roomInformation))
-                MessageBox.Show("Successully Added!");
-            else
-                MessageBox.Show("Fail to add!");
 
-            await FillDataGridView();
-        }
-
-        private async void btnUpdate_Click(object sender, RoutedEventArgs e)
-        {
-            if (_selected == null)
+            if (!roomNumber.IsNullOrEmpty() && !maxCapacity.IsNullOrEmpty() && !pricePerDay.IsNullOrEmpty())
             {
-                MessageBox.Show("Please select a certain room to delete!");
-            }
-            else
-            {
-                var roomId = txtRoomId.Text;
-                var roomNumber = txtRoomNumber.Text;
-                var description = txtDescription.Text;
-                var maxCapacity = txtCapacity.Text;
-                var pricePerDay = txtPrice.Text;
-                var roomTypeId = cbRoomType.SelectedValue;
-
                 RoomInformation roomInformation = new RoomInformation
                 {
-                    RoomId = Convert.ToInt32(roomId),
                     RoomNumber = roomNumber,
                     RoomDetailDescription = description,
                     RoomMaxCapacity = Convert.ToInt32(maxCapacity),
@@ -109,13 +92,54 @@ namespace HotelWpfpApp
                     RoomPricePerDay = Convert.ToDecimal(pricePerDay)
                 };
 
-                if (_roomInformationService.UpdateRoomInformation(roomInformation))
-                {
-                    MessageBox.Show("Successfully Updated!");
-                    await FillDataGridView();
-                }                   
+                if (_roomInformationService.AddRoomInformation(roomInformation))
+                    MessageBox.Show("Successully Added!");
                 else
-                    MessageBox.Show("Fail to update!");               
+                    MessageBox.Show("Fail to add!");
+
+                await FillDataGridView();
+            }
+            else
+            {
+                MessageBox.Show("Please fill all neccessary information!");
+            }
+            
+        }
+
+        private async void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            if (_selected == null)
+            {
+                MessageBox.Show("Please select a certain room to update!");
+            }
+            else
+            {
+                var roomNumber = txtRoomNumber.Text;
+                var description = txtDescription.Text;
+                var maxCapacity = txtCapacity.Text;
+                var pricePerDay = txtPrice.Text;
+                var roomTypeId = cbRoomType.SelectedValue;
+                if (!roomNumber.IsNullOrEmpty() && !maxCapacity.IsNullOrEmpty() && !pricePerDay.IsNullOrEmpty())
+                {
+                    _selected.RoomNumber = roomNumber;
+                    _selected.RoomDetailDescription = description;
+                    _selected.RoomMaxCapacity = Convert.ToInt32(maxCapacity);
+                    _selected.RoomPricePerDay = Convert.ToDecimal(pricePerDay);
+                    _selected.RoomTypeId = Convert.ToInt32(roomTypeId);
+
+                    if (_roomInformationService.UpdateRoomInformation(_selected))
+                    {
+                        MessageBox.Show("Successfully Updated!");
+                        await FillDataGridView();
+                    }
+                    else
+                        MessageBox.Show("Fail to update!");
+                }
+                else
+                {
+                    MessageBox.Show("Please fill all neccessary information!");
+                }
+
             }           
         }
 
@@ -126,7 +150,7 @@ namespace HotelWpfpApp
 
         private void NumberValidation(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex("[^1-9]+");
+            Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
 
@@ -134,17 +158,26 @@ namespace HotelWpfpApp
         {
             if (_selected == null)
             {
-                MessageBox.Show("Please select a certain room to delete!");
+                MessageBox.Show("Please select a certain room to delete!",
+                    "Warning",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
-                if (_roomInformationService.DeleteRoomInformation(_selected))
+                MessageBoxResult result = MessageBox.Show("Are you sure you want to delete the selected room?",
+                                                  "Confirm Delete",
+                                                  MessageBoxButton.YesNo,
+                                                  MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
                 {
-                    MessageBox.Show("Successfully Deleted!");
-                    await FillDataGridView();
-                }                    
-                else
-                    MessageBox.Show("Fail to delete!");
+                    if (_roomInformationService.DeleteRoomInformation(_selected))
+                    {
+                        MessageBox.Show("Successfully Deleted!");
+                        await FillDataGridView();
+                    }
+                    else
+                        MessageBox.Show("Fail to delete!");
+                }               
             }          
         }
     }

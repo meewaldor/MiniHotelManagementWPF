@@ -30,12 +30,12 @@ namespace HotelWpfpApp
             _bookingReservationService = bookingReservationService;
             InitializeComponent();
         }
-        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            await FillData();
+            FillData();
         }
 
-        private async Task FillData()
+        private void FillData()
         {
             if (bookingReservationDTO != null)
             {
@@ -44,9 +44,10 @@ namespace HotelWpfpApp
                 tbBookingStatus.Text = bookingReservationDTO.BookingStatus;
                 tbCustomerName.Text = bookingReservationDTO.CustomerName;
                 tbPhone.Text = bookingReservationDTO.CustomerPhone;
+                tbEmail.Text = bookingReservationDTO.CustomerEmail;
 
                 dgBookingDetails.ItemsSource = bookingReservationDTO.BookingDetails;
-                //txtTotalPrice.Text = bookingReservationDTO.TotalPrice.ToString();
+                txtActualPrice.Text = "AMOUNT: "+bookingReservationDTO.TotalPrice.ToString();
             }
             
         }

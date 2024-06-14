@@ -11,10 +11,14 @@ namespace Services.Helpers
         public MyMapper() 
         {
             CreateMap<Customer, CustomerDTO>();
+            CreateMap<CustomerDTO, Customer>()
+                .ForMember(d => d.Password, o => o.Ignore())
+                .ForMember(d => d.BookingReservations, o => o.Ignore());
 
             CreateMap<BookingReservation, BookingReservationDTO>()
                 .ForMember(d => d.CustomerPhone, o => o.MapFrom(s => s.Customer.Telephone))
                 .ForMember(d => d.CustomerName, o => o.MapFrom(s => s.Customer.CustomerFullName))
+                .ForMember(d => d.CustomerEmail, o => o.MapFrom(s => s.Customer.EmailAddress))
                 .ForMember(d => d.BookingStatus, o => o.MapFrom(s => s.BookingStatus == 1 ? "Pending" : (s.BookingStatus == 2 ? "Confirm" : (s.BookingStatus == 3 ? "Complete" : "Cancel"))));
 
             CreateMap<BookingDetail, BookingDetailDTO>()

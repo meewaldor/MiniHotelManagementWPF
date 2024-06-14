@@ -5,7 +5,7 @@ using Repositories.Interfaces;
 
 namespace Repositories
 {
-    public class BookingReservationRepository : IBookingReservationRepositoty
+    public class BookingReservationRepository : IBookingReservationRepository
     {
         FuminiHotelManagementContext _context;
 
@@ -39,7 +39,9 @@ namespace Repositories
         public async Task<IEnumerable<BookingReservation>> SearchBookings(string searchvalue)
         {
             return await _context.BookingReservations
-                .Where(b => b.BookingReservationId.ToString() == searchvalue || b.Customer.CustomerFullName.Contains(searchvalue) || b.Customer.Telephone.Contains(searchvalue))
+            .Where(b => b.BookingReservationId.ToString() == searchvalue 
+            || b.Customer.CustomerFullName.Contains(searchvalue) 
+            || b.Customer.Telephone.Contains(searchvalue))
             .Include(b => b.Customer)
             .Include(b => b.BookingDetails)
             .ThenInclude(b => b.Room)
@@ -56,6 +58,10 @@ namespace Repositories
         {
             return await _context.BookingReservations
                 .Where(b => b.CustomerId == customerId)
+                .Include(b => b.Customer)
+                .Include(b => b.BookingDetails)
+                .ThenInclude(b => b.Room)
+                .ThenInclude(b => b.RoomType)
                 .ToListAsync();
         }
 

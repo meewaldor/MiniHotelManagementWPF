@@ -1,15 +1,16 @@
 ﻿using AutoMapper;
 using Repositories;
 using Repositories.Entities;
+using Repositories.Interfaces;
 using Services.Dtos;
 
 namespace Services
 {
     public class RoomInformationService
     {
-        private readonly RoomInformationRepository _roomInformationRepository;
+        private readonly IRoomInformationRepository _roomInformationRepository;
         private readonly IMapper _mapper;
-        public RoomInformationService (RoomInformationRepository roomInformationRepository, IMapper mapper)
+        public RoomInformationService (IRoomInformationRepository roomInformationRepository, IMapper mapper)
         {
             _roomInformationRepository = roomInformationRepository;
             _mapper = mapper;
@@ -47,14 +48,19 @@ namespace Services
             return _roomInformationRepository.AddRoomInformation (roomInformation);
         }
 
-        public bool UpdateRoomInformation (RoomInformation roomInformation)
+        public bool UpdateRoomInformation (RoomInformationDTO roomInformationDto)
         {
+            RoomInformation roomInformation = _roomInformationRepository.GetRoomInformationById(roomInformationDto.RoomId);
+            if (roomInformation == null) { return false; }
+            _mapper.Map(roomInformationDto, roomInformation);
             return _roomInformationRepository.UpdateRoomInformation (roomInformation);
         }
 
         public bool DeleteRoomInformation (RoomInformationDTO roomInformationDto)
         {
-            var roomInformation = _mapper.Map<RoomInformation>(roomInformationDto);
+            RoomInformation roomInformation = _roomInformationRepository.GetRoomInformationById(roomInformationDto.RoomId);
+            if (roomInformation == null) { return false; }
+            _mapper.Map(roomInformationDto, roomInformation);
             roomInformation.RoomStatus = 0;
             return _roomInformationRepository.UpdateRoomInformation (roomInformation);
         }

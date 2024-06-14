@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Repositories.Entities;
+using Repositories.Interfaces;
 using Services.Dtos;
 
 
@@ -7,10 +8,10 @@ namespace Repositories
 {
     public class BookingDetailService
     {
-        private readonly BookingDetailRepository _bookingDetailRepository;
+        private readonly IBookingDetailRepository _bookingDetailRepository;
         private readonly IMapper _mapper;
 
-        public BookingDetailService(BookingDetailRepository bookingDetailRepository, IMapper mapper)
+        public BookingDetailService(IBookingDetailRepository bookingDetailRepository, IMapper mapper)
         {
             _bookingDetailRepository = bookingDetailRepository;
             _mapper = mapper;

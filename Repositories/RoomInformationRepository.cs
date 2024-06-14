@@ -38,13 +38,9 @@ namespace Repositories
 
         public bool UpdateRoomInformation (RoomInformation roomInformation)
         {
-            var existingRoom = _context.RoomInformations.Find(roomInformation.RoomId);
-            if (existingRoom != null)
-            {
-                _context.Entry(existingRoom).CurrentValues.SetValues(roomInformation);
-                return _context.SaveChanges() > 0;
-            }
-            return false;
+            _context.Attach(roomInformation);
+            _context.Entry(roomInformation).State = EntityState.Modified;
+            return _context.SaveChanges() > 0;
         }
 
         public bool DeleteRoomInformation (RoomInformation roomInformation) 

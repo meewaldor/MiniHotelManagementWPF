@@ -20,11 +20,20 @@ namespace Services
             _customerRepository = customerRepository;
             _mapper = mapper;
         }
-
+        public Customer Customer {  get; set; }
         // Check login
-        public Customer? CheckLogin(string username, string password)
+        public Customer CheckLogin(string username, string password)
         {
             return _customerRepository.GetUserAccount(username, password);
+        }
+
+        public bool DeleteCustomer(CustomerDTO customerDto)
+        {
+            var customer = _customerRepository.GetCustomerById(customerDto.CustomerId);
+            if (customer == null) { return false; }
+            _mapper.Map(customerDto, customer);
+            customer.CustomerStatus = 0;
+            return _customerRepository.DeleteCustomer(customer);
         }
 
         public async Task<IEnumerable<CustomerDTO>> GetAllCustomers()
@@ -43,6 +52,12 @@ namespace Services
             var customerData = _mapper.Map<IEnumerable<Customer>, IEnumerable<CustomerDTO>>(customers);
 
             return customerData;
+        }
+
+        public bool UpdateCustomer (Customer customer)
+        {
+            //Customer = _mapper.Map<Customer>(customerDto);
+            return _customerRepository.UpdateCustomer(customer);
         }
     }
 }

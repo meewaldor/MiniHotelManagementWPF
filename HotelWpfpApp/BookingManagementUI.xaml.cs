@@ -13,9 +13,11 @@ namespace HotelWpfpApp
     {
         private BookingReservationDTO _selected = null;
         private readonly BookingReservationService _bookingReservationService;
-        public BookingManagementUI(BookingReservationService bookingReservationService)
+        private readonly CustomerService _customerService;
+        public BookingManagementUI(BookingReservationService bookingReservationService, CustomerService customerService)
         {
             _bookingReservationService = bookingReservationService;
+            _customerService = customerService;
             InitializeComponent();
         }
 
@@ -25,19 +27,34 @@ namespace HotelWpfpApp
         }
         private async Task FillDataGridView()
         {
-            dgvBookingsList.ItemsSource = await _bookingReservationService.GetAllBookingReservations();
+            var user = _customerService.Customer;
+
+            if (user != null && user.CustomerStatus == 2)
+                dgvBookingsList.ItemsSource = await _bookingReservationService.GetAllBookingReservations();
+            else if (user != null && user.CustomerStatus == 1)
+                dgvBookingsList.ItemsSource = await _bookingReservationService.GetBookingReservationsByCustomerId(user.CustomerId);
         }
 
         private async void dgvBookingsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (dgvBookingsList.SelectedItems.Count > 0)
             {
-                _selected = (BookingReservationDTO) dgvBookingsList.SelectedItems[0];
-                BookingDetailUI bookingDetailUI = new BookingDetailUI(_bookingReservationService);
-                bookingDetailUI.bookingReservationDTO = _selected;
-                bookingDetailUI.ShowDialog();
+                try
+                {
+                    _selected = (BookingReservationDTO)dgvBookingsList.SelectedItems[0];
+                    BookingDetailUI bookingDetailUI = new BookingDetailUI(_bookingReservationService);
+                    bookingDetailUI.bookingReservationDTO = _selected;
+                    bookingDetailUI.ShowDialog();
 
-                await FillDataGridView();
+                    await FillDataGridView();
+                }
+                catch
+                {
+                    MessageBox.Show("Please select a valid row!",
+                    "Warning",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                
             }
             else
             {
